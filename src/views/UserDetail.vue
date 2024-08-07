@@ -116,14 +116,14 @@
             <table class="table m-0">
               <thead>
                 <tr>
-                  <th scope="col">商品名稱</th>
-                  <th scope="col" class="text-end" style="width: 4rem">數量</th>
+                  <th scope="col" class="ps-0">商品名稱</th>
+                  <th scope="col" class="text-end pe-0" style="width: 4rem">數量</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="item in cart.carts" :key="item.id">
-                  <td>{{ item.product.title }}</td>
-                  <td class="text-end">{{ item.qty }}</td>
+                  <td class="ps-0">{{ item.product.title }}</td>
+                  <td class="text-end pe-0">{{ item.qty }}</td>
                 </tr>
               </tbody>
             </table>
@@ -148,11 +148,11 @@
             </div>
           </div>
           <div class="createOrder d-flex">
-            <a
-              href="/#/userCart"
+            <router-link
+              to="/userCart"
               class="btn btn-outline-secondary w-100"
               style="border-radius: 0; border-bottom-left-radius: 0.25rem"
-              >回上一步</a
+              >回上一步</router-link
             >
             <button
               type="submit"

@@ -53,7 +53,7 @@
       <i class="bi bi-bag-heart my-5 pb-3" style="font-size: 110px"></i>
       <h2 class="pt-4 pb-3">您的願望清單目前是空的唷~</h2>
       <p class="p-3" style="font-size: 20px">趕快加入商品到願望清單吧~</p>
-      <a href="/#/userAllProducts" class="btn btn-dark mb-1">去逛逛</a>
+      <router-link to="/userAllProducts" class="btn btn-dark mb-1">去逛逛</router-link>
   </div>
 </template>
 

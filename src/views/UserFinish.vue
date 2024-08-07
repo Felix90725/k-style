@@ -32,7 +32,7 @@
     <p class="p-3" style="font-size: 20px">
       感謝您的訂購!! 我們正在處理您的訂單，如有任何問題歡迎<a href="https://accounts.google.com/" class="m-0 text-decoration-none">與我們聯繫</a>!!
     </p>
-    <a href="/#/userAllProducts" class="btn btn-dark mb-1">繼續選購</a>
+    <router-link to="/userAllProducts" class="btn btn-dark mb-1">繼續選購</router-link>
   </div>
 </template>
 

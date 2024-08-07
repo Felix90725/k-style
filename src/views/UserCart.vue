@@ -72,8 +72,8 @@
                   </div>
                   <input
                     type="text"
-                    class="countInput form-control form-control-sm text-center
-                    m-0 shadow-nonebg-light"
+                    class="countInput form-control form-control-sm text-center m-0
+                    shadow-nonebg-light"
                     aria-label="Example text with button addon"
                     value="1"
                     @change="updateCart(item)"
@@ -173,20 +173,21 @@
             </div>
           </div>
           <div class="goPay text-center">
-            <a
-              href="/#/userDetail"
+            <router-link
+              to="/userDetail"
               class="btn w-100 bg-dark text-light text-decoration-none rounded-0 rounded-bottom-2"
-              >前往結帳</a
+            >
+              前往結帳</router-link
             >
           </div>
         </div>
       </div>
     </div>
-    <div class="text text-center p-5 m-5" style="min-height: 400px;" v-else>
+    <div class="text text-center p-5 m-5" style="min-height: 400px" v-else>
       <i class="fa-solid fa-cart-plus me-3 mt-5" style="font-size: 90px"></i>
       <h2 class="pt-4 pb-3">您的購物車目前是空的唷~</h2>
       <p class="p-3" style="font-size: 20px">趕快加入商品到購物車!!!</p>
-      <a href="/#/userAllProducts" class="btn btn-dark mb-1">繼續選購</a>
+      <router-link to="/userAllProducts" class="btn btn-dark mb-1">繼續選購</router-link>
     </div>
   </div>
   <DelModal ref="delModal" :item="tempCartProduct" @del-item="deleteProduct"></DelModal>

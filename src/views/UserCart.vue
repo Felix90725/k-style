@@ -31,8 +31,8 @@
       <div class="col-12 col-lg-8 mb-2">
         <h3><i class="fa-solid fa-cart-shopping me-2 mb-3"></i>您的購物車</h3>
         <div class="buyOrDel d-flex justify-content-between my-2">
-          <a href="/#/userAllProducts" class="btn btn-outline-secondary text-decoration-none"
-            ><i class="fa-solid fa-arrow-left-long me-1"></i>繼續選購</a
+          <router-link to="/userAllProducts" class="btn btn-outline-secondary text-decoration-none"
+            ><i class="fa-solid fa-arrow-left-long me-1"></i>繼續選購</router-link
           >
           <a
             href="#"
@@ -72,8 +72,8 @@
                   </div>
                   <input
                     type="text"
-                    class="countInput form-control form-control-sm text-center m-0
-                    shadow-nonebg-light"
+                    class="countInput form-control form-control-sm text-center
+                    m-0 shadow-nonebg-light"
                     aria-label="Example text with button addon"
                     value="1"
                     @change="updateCart(item)"

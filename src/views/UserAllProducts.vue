@@ -1,4 +1,3 @@
-<!-- eslint-disable vuejs-accessibility/anchor-has-content -->
 <template>
   <isLoading :active="isLoading"></isLoading>
   <!-- 產品 banner -->

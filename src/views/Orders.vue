@@ -1,5 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
-<!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
   <isLoading :active="isLoading"></isLoading>
   <div class="text mt-3">
@@ -40,6 +38,7 @@
           <td class="text-right">{{ $filters.currency(item.total) }}</td>
           <td>
             <div class="form-check form-switch">
+              <label class="form-check-label" :for="`paidSwitch${item.id}`">
               <input
                 class="form-check-input"
                 type="checkbox"
@@ -47,7 +46,6 @@
                 v-model="item.is_paid"
                 @change="updatePaid(item)"
               />
-              <label class="form-check-label" :for="`paidSwitch${item.id}`">
                 <span v-if="item.is_paid">已付款</span>
                 <span v-else>未付款</span>
               </label>

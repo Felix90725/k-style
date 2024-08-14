@@ -1,6 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
-<!-- eslint-disable vuejs-accessibility/no-autofocus -->
-<!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
   <!-- 暫時用user-navbar -->
   <isLoading :active="isLoading"></isLoading>
@@ -13,27 +10,28 @@
           <h2 class="h3 mb-3 font-weight-normal text-center border-bottom pb-3">管理員登入</h2>
           <div class="alert alert-danger d-block" role="alert" v-if="!loginError">登入失敗</div>
           <div class="mb-3">
-            <label for="inputEmail" class="my-2">Email</label>
+            <label for="inputEmail" class="d-block">Email
             <input
               type="email"
               id="inputEmail"
-              class="form-control"
+              class="form-control mt-2"
               placeholder="請輸入電子郵件"
               required
-              autofocus
               v-model="user.username"
             />
+          </label>
           </div>
           <div class="mb-3">
-            <label for="inputPassword" class="my-2">Password</label>
+            <label for="inputPassword" class="d-block">Password
             <input
               type="password"
               id="inputPassword"
-              class="form-control"
+              class="form-control mt-2"
               placeholder="請輸入密碼"
               required
               v-model="user.password"
             />
+          </label>
           </div>
 
           <div class="text-end mt-4">

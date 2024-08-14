@@ -1,4 +1,3 @@
-<!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
   <isLoading :active="isLoading"></isLoading>
   <div class="container my-5">
@@ -136,7 +135,7 @@
             </ul>
             <div class="coupons pt-3 pb-3 border-bottom">
               <p class="mb-4">限時優惠劵(全品項9折): <span class="text-danger">style2024</span></p>
-              <label for="coupons" class="mb-2">優惠劵</label>
+              <label for="coupons" class="input-group"><span class="mb-2">優惠劵</span>
               <div class="input-group mb-2">
                 <input
                   id="coupons"
@@ -156,6 +155,7 @@
                   送出
                 </button>
               </div>
+            </label>
               <span class="text-danger" v-if="cart.total != cart.final_total">
                 {{ coupon_data.message }}
               </span>

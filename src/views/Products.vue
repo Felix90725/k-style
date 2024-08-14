@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <isLoading :active="isLoading"></isLoading>
   <div class="text mt-3">

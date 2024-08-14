@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" ref="toast">
     <div class="toast-header rounded-0 text-white border-0" :class="`bg-${msg.style}`">

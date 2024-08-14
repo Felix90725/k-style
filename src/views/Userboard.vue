@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <UserNavbar></UserNavbar>
   <div class="container-fluid position-relative">

@@ -1,4 +1,3 @@
-<!-- eslint-disable vuejs-accessibility/anchor-has-content -->
 <template>
   <nav class="navbar navbar-expand-lg navbar-light sticky-top">
     <div class="container">

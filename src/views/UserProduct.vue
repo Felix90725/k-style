@@ -1,4 +1,3 @@
-<!-- eslint-disable vuejs-accessibility/anchor-has-content -->
 <template>
   <isLoading :active="isLoading"></isLoading>
   <div class="container mt-5">

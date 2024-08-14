@@ -1,5 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
-<!-- eslint-disable vuejs-accessibility/anchor-has-content -->
 <template>
   <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">

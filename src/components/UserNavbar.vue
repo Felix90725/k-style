@@ -64,19 +64,20 @@ export default {
       this.$http.get(api).then((res) => {
         if (res.data.success) {
           this.carts = res.data.data.carts;
-          console.log(this.carts);
         }
       })
         .catch((err) => {
           this.$httpMessageState(err, '連線錯誤，請再試一次');
         });
     },
+
     // 取得愛心收藏資料
     getFavorite() {
       this.favoriteItems = handleFavorites.get();
     },
   },
   computed: {
+    // 取得愛心收藏數量
     cartsNum() {
       let cartNum = 0;
       this.carts.forEach((e) => {

@@ -39,13 +39,13 @@
           <td>
             <div class="form-check form-switch">
               <label class="form-check-label" :for="`paidSwitch${item.id}`">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                :id="`paidSwitch${item.id}`"
-                v-model="item.is_paid"
-                @change="updatePaid(item)"
-              />
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  :id="`paidSwitch${item.id}`"
+                  v-model="item.is_paid"
+                  @change="updatePaid(item)"
+                />
                 <span v-if="item.is_paid">已付款</span>
                 <span v-else>未付款</span>
               </label>
@@ -102,23 +102,15 @@ export default {
         this.orders = res.data.orders;
         this.pagination = res.data.pagination;
         this.isLoading = false;
-        console.log(this.orders);
       });
     },
+
     // 開啟檢視
     openModal(item) {
       this.tempOrder = { ...item };
       this.$refs.backOrderModal.showModal();
     },
-    // 開啟刪除 modal
-    openDelOrderModal(isAllOrder, item) {
-      if (isAllOrder) {
-        this.tempOrder = {};
-      } else {
-        this.tempOrder = { ...item };
-      }
-      this.$refs.delModal.showModal();
-    },
+
     // 更新付款狀態
     updatePaid(item) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${item.id}`;
@@ -132,6 +124,17 @@ export default {
         this.$httpMessageState(res, '更新付款狀態');
       });
     },
+
+    // 開啟刪除 modal
+    openDelOrderModal(isAllOrder, item) {
+      if (isAllOrder) {
+        this.tempOrder = {};
+      } else {
+        this.tempOrder = { ...item };
+      }
+      this.$refs.delModal.showModal();
+    },
+
     // 確認刪除
     delOrder() {
       let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`;

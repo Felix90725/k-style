@@ -42,7 +42,6 @@
 import { Swiper, SwiperSlide } from 'swiper/vue';
 // Swiper 10 這樣寫 ↓
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-
 // Import Swiper stylesimport 'swiper/css'
 import 'swiper/swiper-bundle.css';
 

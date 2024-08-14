@@ -25,7 +25,6 @@ export default {
       delay: 2000,
     });
     toast.show();
-    console.log(this.msg);
   },
 };
 </script>

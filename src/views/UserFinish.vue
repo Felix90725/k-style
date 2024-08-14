@@ -30,7 +30,8 @@
     <i class="bi bi-bag-check-fill" style="font-size: 90px"></i>
     <h2 class="pt-4 pb-3">您的訂單已成功付款!</h2>
     <p class="p-3" style="font-size: 20px">
-      感謝您的訂購!! 我們正在處理您的訂單，如有任何問題歡迎<a href="https://accounts.google.com/" class="m-0 text-decoration-none">與我們聯繫</a>!!
+      感謝您的訂購!! 我們正在處理您的訂單，如有任何問題歡迎
+      <router-link to="" href="https://accounts.google.com/" target="_blank" class="m-0 text-decoration-none">與我們聯繫</router-link>!!
     </p>
     <router-link to="/userAllProducts" class="btn btn-dark mb-1">繼續選購</router-link>
   </div>

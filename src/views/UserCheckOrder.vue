@@ -60,15 +60,14 @@ export default {
       this.$http.get(api).then((res) => {
         this.isLoading = false;
         this.orders = res.data.orders;
-        // 篩選
-        this.filteredOrders = this.orders.filter((order) => order.user.email === this.email);
+        this.filteredOrders = this.orders.filter((order) => order.user.email === this.email); // 篩選
       });
     },
+
     // 開啟詳細
     openOrder(item) {
       this.tempOrder = { ...item };
       this.$refs.userOrderModal.showModal();
-      console.log(this.tempOrder);
     },
   },
   created() {

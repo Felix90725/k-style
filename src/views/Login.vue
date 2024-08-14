@@ -1,8 +1,6 @@
 <template>
-  <!-- 暫時用user-navbar -->
   <isLoading :active="isLoading"></isLoading>
   <UserNavbar></UserNavbar>
-  <!-- 下方表單 -->
   <div class="kv">
     <div class="container h-100">
       <form class="row justify-content-center align-content-center h-100" @submit.prevent="signIn">

@@ -15,13 +15,11 @@
         </li>
       </ol>
     </nav>
-    <!-- 單一產品 -->
+    <!-- 單一產品資訊-->
     <div class="row pt-2">
-      <!-- 產品圖片 -->
       <div class="product-img col-md-5">
         <img :src="product.imageUrl" alt="product1" />
       </div>
-      <!-- 產品資訊 -->
       <div class="col-md-6 mx-auto">
         <div class="product-title">
           <h2 class="mt-2 mt-md-0">{{ product.title }}</h2>
@@ -42,8 +40,7 @@
         <div class="product-description mt-3">
           <div class="description mt-3" v-if="product.description">
             <span class="about">【DESCRIPTION】</span>
-            <!-- 控制空白處理方式 -->
-            <p class="m-0 ms-2" style="white-space: pre-line">
+            <p class="m-0 ms-2" style="white-space: pre-line"> <!-- 控制空白處理方式 -->
               {{ product.description }}
             </p>
           </div>
@@ -66,7 +63,6 @@
             </div>
           </div>
         </div>
-
         <div class="row">
           <p class="mt-3">數量:</p>
           <div class="col-7">
@@ -111,7 +107,6 @@
             </button>
           </div>
         </div>
-
         <div class="row mt-4">
           <div class="col-6">
             <button
@@ -135,6 +130,7 @@
         </div>
       </div>
     </div>
+
     <div class="Precautions mt-2 col-md-6 text-secondary">
       <p class="m-1">商品說明:</p>
       <ul>
@@ -186,11 +182,11 @@ export default {
         if (res.data.success) {
           this.isLoading = false;
           this.product = res.data.product;
-          console.log('getProduct', this.product);
         }
         this.getAllProduct();
       });
     },
+
     // 加入購物車
     addCard(id) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
@@ -200,7 +196,6 @@ export default {
       };
       this.status.loadingItem = id;
       this.isLoading = true;
-
       return this.$http.post(api, { data: cart })
         .then((res) => {
           this.isLoading = false;
@@ -219,20 +214,22 @@ export default {
           return false;
         });
     },
+
     // 進入購物車介面
     goToCart(id) {
-      // 確保addCard先執行完，回傳true
-      this.addCard(id).then((success) => {
+      this.addCard(id).then((success) => { // 確保addCard先執行完，回傳true
         if (success) {
           emitter.emit('updateCart'); // 與 UserNavbar 同步更新
           this.$router.push('/userCart');
         }
       });
     },
+
     // 按鈕更新產品的數量
     updateQuantity(number) {
       this.productQty += number;
     },
+
     // 愛心收藏切換
     toggleFavorite(product) {
       if (this.favoriteItems.includes(product.id)) { // 移除收藏
@@ -251,26 +248,27 @@ export default {
       handleFavorites.save(this.favoriteItems);
       emitter.emit('updateFavorite'); // 與 navFavorite 同步更新
     },
+
     // 取得全部商品(swiper用)
     getAllProduct() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
       this.isLoading = true;
       this.$http.get(api).then((res) => {
         if (res.data.success) {
-          // console.log('getAllProduct', res);
           this.isLoading = false;
           this.swiperData = res.data.products;
           this.filterProducts();
         }
       });
     },
+
     // 篩選出單一品項類型商品(swiper用)
     filterProducts() {
       this.filteredSwiper = this.swiperData.filter(
         (data) => data.category === this.product.category && data.id !== this.product.id,
       );
-      // console.log('this.filteredSwiper', this.filteredSwiper);
     },
+
     // 滾動到最上方
     scrollToTop() {
       window.scrollTo({

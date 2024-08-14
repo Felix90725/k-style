@@ -192,6 +192,7 @@ export default {
       const phoneNumber = /^(09)[0-9]{8}$/;
       return phoneNumber.test(value) ? true : '請輸入正確的手機號碼';
     },
+
     // 送出顧客表單
     createOrder() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`;
@@ -199,9 +200,9 @@ export default {
       this.$http.post(api, { data: this.form }).then((res) => {
         this.isLoading = false;
         this.$router.push(`/userPay/${res.data.orderId}`);
-        // console.log('createOrder', res);
       });
     },
+
     // 取得購物車資料
     getCart() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
@@ -209,7 +210,6 @@ export default {
       this.$http.get(api).then((res) => {
         this.isLoading = false;
         this.cart = res.data.data;
-        console.log('getCart', res);
       });
     },
   },

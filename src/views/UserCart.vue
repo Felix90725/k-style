@@ -33,13 +33,10 @@
           <router-link to="/userAllProducts" class="btn btn-outline-secondary text-decoration-none"
             ><i class="fa-solid fa-arrow-left-long me-1"></i>繼續選購</router-link
           >
-          <a
-            href="#"
-            class="btn btn-outline-danger text-decoration-none ms-3"
-            @click.prevent="openDelProductModal(true)"
-          >
-            <i class="fa-regular fa-trash-can me-1"></i>清空購物車</a
-          >
+          <button class="btn btn-outline-danger text-decoration-none ms-3"
+            @click.prevent="openDelProductModal(true)">
+            <i class="fa-regular fa-trash-can me-1"></i>清空購物車
+          </button>
         </div>
         <table class="table">
           <thead>
@@ -77,7 +74,6 @@
                     value="1"
                     @change="updateCart(item)"
                     v-model.number="item.qty"
-                    style=""
                   />
                   <div class="input-group-append">
                     <button
@@ -135,7 +131,7 @@
             </ul>
             <div class="coupons pt-3 pb-3 border-bottom">
               <p class="mb-4">限時優惠劵(全品項9折): <span class="text-danger">style2024</span></p>
-              <label for="coupons" class="input-group"><span class="mb-2">優惠劵</span>
+              <label for="coupons" class="input-group"><span class="mb-1">優惠劵</span>
               <div class="input-group mb-2">
                 <input
                   id="coupons"
@@ -225,9 +221,9 @@ export default {
         this.isLoading = false;
         this.cart = res.data.data;
         this.addAllQty();
-        console.log('getCart', res);
       });
     },
+
     // 按鈕更新產品的數量
     updateQuantity(item, num) {
       const newQty = item.qty + num;
@@ -237,6 +233,7 @@ export default {
         this.updateCart(item);
       }
     },
+
     // 更新購物車
     updateCart(item) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
@@ -249,15 +246,16 @@ export default {
         this.isLoading = false;
         emitter.emit('updateCart'); // 與 navCart 同步更新
         this.$httpMessageState(res, '更新數量');
-        console.log('updateCart', res);
         this.getCart();
       });
     },
+
     // 計算總數量
     addAllQty() {
       // 使用 reduce 方法計算 cart.carts 數組(計算總數量)
       this.allQty = this.cart.carts.reduce((sum, item) => sum + item.qty, 0);
     },
+
     // 開啟刪除 Modal
     openDelProductModal(isAll, item) {
       if (isAll) {
@@ -268,8 +266,8 @@ export default {
         this.$refs.delModal.showModal();
         this.tempCartProduct = this.tempCart.product;
       }
-      console.log(this.tempCartProduct);
     },
+
     // 刪除單一購物車資料 or 全部
     deleteProduct() {
       // 單一
@@ -296,6 +294,7 @@ export default {
         });
       }
     },
+
     // 新增優惠劵
     addCouponCode() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`;
@@ -304,7 +303,6 @@ export default {
       };
       this.$http.post(api, { data: coupon }).then((res) => {
         this.coupon_data = res.data;
-        console.log('addCouponCode', res);
         this.getCart();
       });
     },

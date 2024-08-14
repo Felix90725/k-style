@@ -179,8 +179,7 @@ export default {
       isLoading: false,
       nowChoose: '全部商品',
       filteredProducts: [],
-      // 加入購物車讀取效果
-      status: {
+      status: { // 加入購物車讀取效果
         loadingItem: '', // 對應品項 id
       },
       favoriteItems: handleFavorites.get('myFavorite') || [], // 取得收藏商品
@@ -193,27 +192,23 @@ export default {
       this.isLoading = true;
       this.$http.get(api).then((res) => {
         this.isLoading = false;
-        console.log('getProduct', res);
         this.products = res.data.products;
         this.filterProducts(page);
         this.scrollToTop();
       });
     },
+
     // 愛心收藏切換
     toggleFavorite(product) {
       if (this.favoriteItems.includes(product.id)) {
-        // 移除收藏
-        this.favoriteItems.splice(this.favoriteItems.indexOf(product.id), 1);
-        emitter.emit('push-message', {
-          // toast
+        this.favoriteItems.splice(this.favoriteItems.indexOf(product.id), 1); // 移除收藏
+        emitter.emit('push-message', { // toast
           style: 'warning',
           title: '已從收藏清單中移除',
         });
-      } else {
-        // 新增收藏
+      } else { // 新增收藏
         this.favoriteItems.push(product.id);
-        emitter.emit('push-message', {
-          // toast
+        emitter.emit('push-message', { // toast
           style: 'success',
           title: '已新增至收藏清單',
         });
@@ -221,16 +216,19 @@ export default {
       handleFavorites.save(this.favoriteItems);
       emitter.emit('updateFavorite'); // 與 navFavorite 同步更新
     },
+
     // 前往單一商品頁面
     getProduct(id) {
       this.$router.push(`/product/${id}`);
     },
+
     // 選擇點選的商品類型
     chooseProduct(item) {
       this.nowChoose = item;
       this.filterProducts();
       this.scrollToProduct();
     },
+
     // 過濾產品
     filterProducts(page = 1) {
       if (this.nowChoose === '全部商品') {
@@ -240,9 +238,9 @@ export default {
           (product) => product.category === this.nowChoose,
         );
       }
-      // console.log(this.filteredProducts);
       this.setPagination(page); // 每次過濾後設置分頁
     },
+
     // 設定頁碼
     setPagination(page = 1) {
       const perPage = 9;
@@ -254,6 +252,7 @@ export default {
       // 每頁顯示的資料
       this.filteredProducts = this.filteredProducts.slice((page - 1) * perPage, page * perPage);
     },
+
     // 加入購物車
     addCard(id) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
@@ -266,9 +265,9 @@ export default {
         this.status.loadingItem = '';
         this.$httpMessageState(res, '加入購物車');
         emitter.emit('updateCart'); // 與 UserNavbar 同步更新
-        // console.log('addCard', res);
       });
     },
+
     // 滾動到最上方
     scrollToTop() {
       window.scrollTo({
@@ -276,6 +275,7 @@ export default {
         behavior: 'smooth',
       });
     },
+
     // 滾動到產品頁面
     scrollToProduct() {
       window.scrollTo({

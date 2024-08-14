@@ -55,18 +55,15 @@ export default {
       this.$http.get(api).then((res) => {
         this.isLoading = false;
         this.orders = res.data.orders;
-        // 篩選
-        this.filteredOrders = this.orders.filter((order) => order.user.email === this.email);
+        this.filteredOrders = this.orders.filter((order) => order.user.email === this.email); // 篩選
         if (this.filteredOrders.length > 0) {
           this.$router.push(`/userCheckOrder/${this.email}`);
         } else {
-          emitter.emit('push-message', {
-          // toast
+          emitter.emit('push-message', { // toast
             style: 'danger',
             title: '查無此訂單',
           });
         }
-        // console.log('searchOrder', this.filteredOrders);
       });
     },
   },

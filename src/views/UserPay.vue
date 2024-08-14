@@ -154,9 +154,9 @@ export default {
       this.$http.get(api).then((res) => {
         this.isLoading = false;
         this.order = res.data.order;
-        // console.log('getOrder', res.data.order.products);
       });
     },
+
     // 結帳付款
     goToPay() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${this.orderId}`;

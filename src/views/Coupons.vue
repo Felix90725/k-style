@@ -78,18 +78,17 @@ export default {
       this.isLoading = true;
       this.$http.get(api).then((res) => {
         this.isLoading = false;
-        console.log('getCoupons', res);
         this.coupons = res.data.coupons;
         this.pagination = res.data.pagination;
       });
     },
+
     // 開啟新增 or 編輯 Modal
     openCouponModal(isNew, item) {
       console.log(isNew, item);
       if (isNew) {
         this.tempCoupon = {
-          // 當前時間的 UNIX 時間戳（以秒為單位）
-          due_date: new Date().getTime() / 1000,
+          due_date: new Date().getTime() / 1000, // 當前時間的 UNIX 時間戳（以秒為單位）
           is_enabled: 0,
         };
       } else {
@@ -98,13 +97,12 @@ export default {
       this.isNew = isNew;
       this.$refs.couponModal.showModal();
     },
+
     // 新增 or 編輯遠端優惠劵
     updateCoupon() {
-      // 新增
-      if (this.isNew) {
+      if (this.isNew) { // 新增
         const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon`;
         this.$http.post(api, { data: this.tempCoupon }).then((res) => {
-          console.log('updateCoupon', res);
           this.getCoupons();
           this.$refs.couponModal.hideModal();
           this.$httpMessageState(res, '新增優惠劵');
@@ -112,25 +110,25 @@ export default {
       } else { // 編輯
         const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`;
         this.$http.put(api, { data: this.tempCoupon }).then((res) => {
-          console.log('updateCoupon', res);
           this.getCoupons();
           this.$refs.couponModal.hideModal();
           this.$httpMessageState(res, '編輯優惠劵');
         });
       }
     },
+
     // 開啟刪除 Modal
     openDelCouponModal(item) {
       this.tempCoupon = { ...item };
       this.$refs.delModal.showModal();
     },
+
     // 刪除遠端優惠劵
     delCoupon() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`;
       this.isLoading = true;
       this.$http.delete(api).then((res) => {
         this.isLoading = false;
-        console.log('delCoupon', res);
         this.getCoupons();
         this.$refs.delModal.hideModal();
         this.$httpMessageState(res, '刪除優惠劵');

@@ -86,13 +86,12 @@ export default {
         );
       });
     },
+
     // 移除愛心
     delFavorite(product) {
       if (this.favoriteItems.includes(product.id)) {
-        // 移除收藏
-        this.favoriteItems.splice(this.favoriteItems.indexOf(product.id), 1);
-        emitter.emit('push-message', {
-          // toast
+        this.favoriteItems.splice(this.favoriteItems.indexOf(product.id), 1); // 移除收藏
+        emitter.emit('push-message', { // toast
           style: 'warning',
           title: '已從收藏清單中移除',
         });
@@ -101,6 +100,7 @@ export default {
       this.getAllProducts();
       emitter.emit('updateFavorite'); // 與 navFavorite 同步更新
     },
+
     // 加入購物車
     addCard(id) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
@@ -113,9 +113,9 @@ export default {
         this.isLoading = false;
         this.$httpMessageState(res, '加入購物車');
         emitter.emit('updateCart'); // 與 UserNavbar 同步更新
-        // console.log('addCard', res);
       });
     },
+
     // 滾動到最上方
     scrollToTop() {
       window.scrollTo({

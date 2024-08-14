@@ -80,11 +80,11 @@ export default {
       this.isLoading = true;
       this.$http.get(api).then((res) => {
         this.isLoading = false;
-        // console.log(res);
         this.products = res.data.products;
         this.pagination = res.data.pagination;
       });
     },
+
     // 開啟建立新的產品 or 編輯
     openModal(isNew, item) {
       if (isNew) {
@@ -96,6 +96,7 @@ export default {
       const productComponent = this.$refs.productModal;
       productComponent.showModal();
     },
+
     // 遠端商品建立 or 編輯
     updateProduct(item) {
       this.tempProduct = item;
@@ -109,11 +110,9 @@ export default {
       }
       const productComponent = this.$refs.productModal;
       this.$http[httpMethod](api, { data: this.tempProduct }).then((res) => {
-        console.log(res);
         productComponent.hideModal();
         this.getProducts();
-        // 加入訊息回饋
-        if (res.data.success && !this.isNew) {
+        if (res.data.success && !this.isNew) { // 加入訊息回饋
           this.$httpMessageState(res, '編輯');
         } else if (res.data.success) {
           this.$httpMessageState(res, '新增');
@@ -122,11 +121,13 @@ export default {
         }
       });
     },
+
     // 開啟刪除 Modal
     openDelProductModal(item) {
       this.tempProduct = { ...item };
       this.$refs.delModal.showModal();
     },
+
     // 刪除遠端產品
     delProduct() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${this.tempProduct.id}`;
@@ -134,7 +135,6 @@ export default {
       this.$http.delete(api).then((res) => {
         this.isLoading = false;
         this.$httpMessageState(res, '刪除');
-        console.log(res);
         this.getProducts();
         this.$refs.delModal.hideModal();
       });

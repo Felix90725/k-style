@@ -1,5 +1,5 @@
 <template>
-  <isLoading :active="isLoading"></isLoading>
+  <isLoading :active="isLoading" />
   <div class="text mt-3">
     <h4>控制台</h4>
   </div>
@@ -41,11 +41,9 @@ export default {
     logout() {
       const api = `${process.env.VUE_APP_API}logout`;
       this.isLoading = true;
-      this.$http.post(api, this.user).then((res) => {
-        if (res.data.success) {
-          this.isLoading = false;
-          this.$router.push('/login');
-        }
+      this.$http.post(api, this.user).then(() => {
+        this.isLoading = false;
+        this.$router.push('/login');
       });
     },
   },

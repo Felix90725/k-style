@@ -1,5 +1,5 @@
 <template>
-  <isLoading :active="isLoading"></isLoading>
+  <isLoading :active="isLoading"/>
   <div class="container p-lg-5 m-0 m-auto" style="min-height: 660px" v-if="products.length > 0">
     <h3 class="m-0 mb-4"><i class="bi bi-bag-heart me-2"></i>您的願望清單</h3>
     <table class="table" style="max-width: 1200px">

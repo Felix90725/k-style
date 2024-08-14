@@ -1,5 +1,5 @@
 <template>
-  <isLoading :active="isLoading"></isLoading>
+  <isLoading :active="isLoading"/>
   <div class="text mt-3">
     <h4>產品列表</h4>
   </div>

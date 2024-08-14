@@ -1,5 +1,5 @@
 <template>
-  <isLoading :active="isLoading"></isLoading>
+  <isLoading :active="isLoading"/>
   <!-- 產品 banner -->
   <div
     class="product-banner container-fluid w-100 d-flex justify-content-center align-items-center"

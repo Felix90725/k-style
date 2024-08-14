@@ -239,10 +239,7 @@ export default {
       formData.append('file-to-upload', uploadedFile);
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`;
       this.$http.post(api, formData).then((res) => {
-        if (res.data.success) {
-          this.tempProduct.imageUrl = res.data.imageUrl;
-          console.log(this.tempProduct.imageUrl);
-        }
+        this.tempProduct.imageUrl = res.data.imageUrl;
       });
     },
   },

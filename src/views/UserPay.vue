@@ -1,5 +1,5 @@
 <template>
-  <isLoading :active="isLoading"></isLoading>
+  <isLoading :active="isLoading"/>
   <div class="container my-5">
     <ol class="shoppingProcess d-flex justify-content-center align-items-center p-0 mb-5">
       <li>

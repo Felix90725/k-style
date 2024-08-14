@@ -1,5 +1,5 @@
 <template>
-  <isLoading :active="isLoading"></isLoading>
+  <isLoading :active="isLoading"/>
   <div class="container my-5">
     <h2 class="pb-4"><i class="bi bi-card-checklist me-2"></i>您的購買清單</h2>
     <table class="table">

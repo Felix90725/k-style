@@ -21,8 +21,8 @@
           <router-link to="/userLike" class="nav-link me-3 position-relative">
             <i class="fa-solid fa-heart" style="font-size: 18px"></i>
             <span
-              class="position-absolute top-0 start-100 translate-middle
-              badge rounded-circle bg-danger mt-2"
+              class="position-absolute top-0 start-100 translate-middle badge
+              rounded-circle bg-danger mt-2"
               v-if="favoriteItems.length > 0"
             >
               {{ favoriteItems.length }}
@@ -33,8 +33,9 @@
           <router-link to="/userCart" class="nav-link me-3 position-relative">
             <i class="fa-solid fa-cart-shopping" style="font-size: 18px"></i>
             <span
-              class="position-absolute top-0 start-100 translate-middle
-              badge rounded-circle bg-danger mt-2" v-if="carts.length > 0"
+              class="position-absolute top-0 start-100 translate-middle badge
+              rounded-circle bg-danger mt-2"
+              v-if="carts.length > 0"
             >
               {{ cartsNum }}
               <span class="visually-hidden">unread messages</span>
@@ -61,11 +62,11 @@ export default {
     // 取得購物車資料
     getCart() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
-      this.$http.get(api).then((res) => {
-        if (res.data.success) {
+      this.$http
+        .get(api)
+        .then((res) => {
           this.carts = res.data.data.carts;
-        }
-      })
+        })
         .catch((err) => {
           this.$httpMessageState(err, '連線錯誤，請再試一次');
         });

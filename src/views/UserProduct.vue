@@ -1,5 +1,5 @@
 <template>
-  <isLoading :active="isLoading"></isLoading>
+  <isLoading :active="isLoading" />
   <div class="container mt-5">
     <!-- 麵包屑 breadcrumb-->
     <nav aria-label="breadcrumb">
@@ -40,7 +40,8 @@
         <div class="product-description mt-3">
           <div class="description mt-3" v-if="product.description">
             <span class="about">【DESCRIPTION】</span>
-            <p class="m-0 ms-2" style="white-space: pre-line"> <!-- 控制空白處理方式 -->
+            <p class="m-0 ms-2" style="white-space: pre-line">
+              <!-- 控制空白處理方式 -->
               {{ product.description }}
             </p>
           </div>
@@ -101,8 +102,11 @@
           </div>
           <div class="col-5 d-flex align-items-center justify-content-end">
             <button type="button" class="btn border-0" @click="toggleFavorite(product)">
-              <i class="fa-solid fa-heart text-danger" style="font-size: 2rem"
-              v-if="favoriteItems.includes(product.id)"></i>
+              <i
+                class="fa-solid fa-heart text-danger"
+                style="font-size: 2rem"
+                v-if="favoriteItems.includes(product.id)"
+              ></i>
               <i class="fa-regular fa-heart text-danger" style="font-size: 2rem" v-else></i>
             </button>
           </div>
@@ -179,10 +183,8 @@ export default {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${this.id}`;
       this.isLoading = true;
       this.$http.get(api).then((res) => {
-        if (res.data.success) {
-          this.isLoading = false;
-          this.product = res.data.product;
-        }
+        this.isLoading = false;
+        this.product = res.data.product;
         this.getAllProduct();
       });
     },
@@ -196,32 +198,27 @@ export default {
       };
       this.status.loadingItem = id;
       this.isLoading = true;
-      return this.$http.post(api, { data: cart })
+      return this.$http
+        .post(api, { data: cart })
         .then((res) => {
           this.isLoading = false;
           this.status.loadingItem = '';
-          if (res.data.success) {
-            this.$httpMessageState(res, '加入購物車');
-            emitter.emit('updateCart'); // 與 UserNavbar 同步更新
-            return true;
-          }
-          return false;
+          this.$httpMessageState(res, '加入購物車');
+          emitter.emit('updateCart'); // 與 UserNavbar 同步更新
         })
         .catch((error) => {
           this.isLoading = false;
           this.status.loadingItem = '';
           this.$httpMessageState(error, '加入購物車失敗');
-          return false;
         });
     },
 
     // 進入購物車介面
     goToCart(id) {
-      this.addCard(id).then((success) => { // 確保addCard先執行完，回傳true
-        if (success) {
-          emitter.emit('updateCart'); // 與 UserNavbar 同步更新
-          this.$router.push('/userCart');
-        }
+      this.addCard(id).then(() => {
+        // 確保addCard先執行完，回傳true
+        emitter.emit('updateCart'); // 與 UserNavbar 同步更新
+        this.$router.push('/userCart');
       });
     },
 
@@ -232,15 +229,19 @@ export default {
 
     // 愛心收藏切換
     toggleFavorite(product) {
-      if (this.favoriteItems.includes(product.id)) { // 移除收藏
+      if (this.favoriteItems.includes(product.id)) {
+        // 移除收藏
         this.favoriteItems.splice(this.favoriteItems.indexOf(product.id), 1);
-        emitter.emit('push-message', { // toast
+        emitter.emit('push-message', {
+          // toast
           style: 'warning',
           title: '已從收藏清單中移除',
         });
-      } else { // 新增收藏
+      } else {
+        // 新增收藏
         this.favoriteItems.push(product.id);
-        emitter.emit('push-message', { // toast
+        emitter.emit('push-message', {
+          // toast
           style: 'success',
           title: '已新增至收藏清單',
         });
@@ -254,11 +255,9 @@ export default {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
       this.isLoading = true;
       this.$http.get(api).then((res) => {
-        if (res.data.success) {
-          this.isLoading = false;
-          this.swiperData = res.data.products;
-          this.filterProducts();
-        }
+        this.isLoading = false;
+        this.swiperData = res.data.products;
+        this.filterProducts();
       });
     },
 

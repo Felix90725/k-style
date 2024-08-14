@@ -1,5 +1,5 @@
 <template>
-  <isLoading :active="isLoading"></isLoading>
+  <isLoading :active="isLoading"/>
   <UserNavbar></UserNavbar>
   <div class="kv">
     <div class="container h-100">

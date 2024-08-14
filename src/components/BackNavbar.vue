@@ -55,11 +55,9 @@ export default {
     logout() {
       const api = `${process.env.VUE_APP_API}logout`;
       this.isLoading = true;
-      this.$http.post(api, this.user).then((res) => {
-        if (res.data.success) {
-          this.isLoading = false;
-          this.$router.push('/login');
-        }
+      this.$http.post(api, this.user).then(() => {
+        this.isLoading = false;
+        this.$router.push('/login');
       });
     },
   },
@@ -96,8 +94,8 @@ nav {
   }
 }
 // 大於 992 時
-@media screen and (min-width:992px) {
-  nav{
+@media screen and (min-width: 992px) {
+  nav {
     height: 100vh;
   }
 }

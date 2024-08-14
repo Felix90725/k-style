@@ -1,6 +1,6 @@
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
-  <isLoading :active="isLoading"></isLoading>
+  <isLoading :active="isLoading"/>
   <div class="container my-sm-5 pt-5">
     <div class="title">
       <h2 class="my-4 pb-4 text-center"><i class="bi bi-bag-check me-2"></i>購買訂單查詢</h2>

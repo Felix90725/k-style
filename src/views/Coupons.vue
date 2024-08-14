@@ -1,5 +1,5 @@
 <template>
-  <isLoading :active="isLoading"></isLoading>
+  <isLoading :active="isLoading"/>
   <div class="text mt-3">
     <h4>優惠券列表</h4>
   </div>
@@ -85,7 +85,6 @@ export default {
 
     // 開啟新增 or 編輯 Modal
     openCouponModal(isNew, item) {
-      console.log(isNew, item);
       if (isNew) {
         this.tempCoupon = {
           due_date: new Date().getTime() / 1000, // 當前時間的 UNIX 時間戳（以秒為單位）

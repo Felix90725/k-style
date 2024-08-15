@@ -80,57 +80,15 @@
   <div class="card-container container mt-5">
     <h3 class="text-center">熱銷商品</h3>
     <div class="card-row row row-cols-1 row-cols-md-2 row-cols-lg-4 g-5">
-      <div class="col">
-        <router-link to="product/-O2F2W0qqxBimYSrZtWK" class="card m-auto text-decoration-none">
-          <img src="../assets/img/card1.webp" class="card-img card-img-top" alt="card1"/>
+      <div class="col" v-for="item in topFourProducts" :key="item.id">
+        <router-link :to="`product/${item.id}`" class="card m-auto text-decoration-none">
+          <img :src="item.imageUrl" class="card-img card-img-top" alt="card1" />
           <div class="card-body">
-            <h5>戈斯顏料針織短TEE</h5>
+            <h5>{{ item.title }}</h5>
             <p class="card-text">
-              <span class="original text-decoration-line-through">NT$2,180</span>
+              <span class="original text-decoration-line-through">NT${{ item.origin_price }}</span>
               <br />
-              <span class="cheap text-danger">NT$1,490</span>
-            </p>
-          </div>
-        </router-link>
-      </div>
-
-      <div class="col">
-        <router-link to="product/-O2F3BBvgH1-5vZunOdi" class="card m-auto text-decoration-none">
-          <img src="../assets/img/card2.webp" class="card-img card-img-top" alt="card2" />
-          <div class="card-body">
-            <h5>奧爾斯領扣針織短TEE</h5>
-            <p class="card-text">
-              <span class="original text-decoration-line-through">NT$2,080</span>
-              <br />
-              <span class="cheap text-danger">NT$1,360</span>
-            </p>
-          </div>
-        </router-link>
-      </div>
-
-      <div class="col">
-        <router-link to="product/-O2F2hZChDkfF3zUEI86" class="card m-auto text-decoration-none">
-          <img src="../assets/img/card26.webp" class="card-img card-img-top" alt="card3" />
-          <div class="card-body">
-            <h5>蒂夫涼爽休閒襯衫</h5>
-            <p class="card-text">
-              <span class="original text-decoration-line-through">NT$1,380</span>
-              <br />
-              <span class="cheap text-danger">NT$1,060</span>
-            </p>
-          </div>
-        </router-link>
-      </div>
-
-      <div class="col">
-        <router-link to="product/-O2F3LDeEliL4zTJH7pz" class="card m-auto text-decoration-none">
-          <img src="../assets/img/card4.webp" class="card-img card-img-top" alt="" />
-          <div class="card-body">
-            <h5>里歐長腿牛仔褲</h5>
-            <p class="card-text">
-              <span class="original text-decoration-line-through">NT$1,980</span>
-              <br />
-              <span class="cheap text-danger">NT$1,250</span>
+              <span class="cheap text-danger">NT${{ item.price }}</span>
             </p>
           </div>
         </router-link>
@@ -171,6 +129,32 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      products: {},
+      topFourProducts: [],
+    };
+  },
+  methods: {
+    // 取得商品資料
+    getProducts() {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
+      this.isLoading = true;
+      this.$http.get(api).then((res) => {
+        this.isLoading = false;
+        this.products = res.data.products;
+        this.topFourProducts = this.products.slice(0, 4);
+      });
+    },
+  },
+  created() {
+    this.getProducts();
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 .banner-img {

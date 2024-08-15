@@ -215,10 +215,11 @@ export default {
 
     // 進入購物車介面
     goToCart(id) {
-      this.addCard(id).then(() => {
-        // 確保addCard先執行完，回傳true
+      this.addCard(id).then(() => { // 確保addCard先執行完，回傳true
         emitter.emit('updateCart'); // 與 UserNavbar 同步更新
         this.$router.push('/userCart');
+      }).catch((error) => {
+        this.$httpMessageState(error, '加入購物車失敗');
       });
     },
 

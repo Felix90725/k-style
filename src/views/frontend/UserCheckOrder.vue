@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import UserOrderModal from '@/components/UserOrderModal.vue';
+import UserOrderModal from '@/components/frontend/UserOrderModal.vue';
 
 export default {
   components: {

@@ -155,7 +155,7 @@
 </template>
 
 <script>
-import ProductSwiper from '@/components/ProductSwiper.vue';
+import ProductSwiper from '@/components/frontend/ProductSwiper.vue';
 import emitter from '@/methods/emitter';
 import handleFavorites from '@/methods/handleFavorites';
 

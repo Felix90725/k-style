@@ -194,8 +194,8 @@
 </template>
 
 <script>
-import DelModal from '@/components/DelModal.vue';
-import UserDelModal from '@/components/UserDelModal.vue';
+import DelModal from '@/components/backend/DelModal.vue';
+import UserDelModal from '@/components/frontend/UserDelModal.vue';
 import emitter from '@/methods/emitter';
 
 export default {

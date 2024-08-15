@@ -14,8 +14,8 @@
 
 <script>
 import emitter from '@/methods/emitter';
-import BackNavbar from '../components/BackNavbar.vue';
-import ToastMessages from '../components/ToastMessages.vue';
+import BackNavbar from '../../components/backend/BackNavbar.vue';
+import ToastMessages from '../../components/ToastMessages.vue';
 
 export default {
   components: {

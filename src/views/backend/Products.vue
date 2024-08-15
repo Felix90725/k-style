@@ -62,8 +62,8 @@
 
 <script>
 import Pagination from '@/components/Pagination.vue';
-import ProductModal from '../components/ProductModal.vue';
-import DelModal from '../components/DelModal.vue';
+import ProductModal from '../../components/backend/ProductModal.vue';
+import DelModal from '../../components/backend/DelModal.vue';
 
 export default {
   components: {

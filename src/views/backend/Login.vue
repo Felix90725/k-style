@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import UserNavbar from '@/components/UserNavbar.vue';
+import UserNavbar from '@/components/frontend/UserNavbar.vue';
 
 export default {
   components: {
@@ -89,7 +89,7 @@ export default {
 <style lang="scss" scoped>
 .kv {
   height: 93.9vh;
-  background-image: url("../assets/img/login2.0.jpg");
+  background-image: url("../../assets/img/login2.0.jpg");
   background-size: cover;
   .login {
     background-color: rgba(0, 0, 0, 0.5);

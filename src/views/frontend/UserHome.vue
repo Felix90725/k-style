@@ -32,7 +32,7 @@
 
     <div class="carousel-inner">
       <div class="banner-img carousel-item active" data-bs-interval="5000">
-        <img src="../assets/img/banner2.webp" class="d-block w-100" alt="幻燈片1" />
+        <img src="../../assets/img/banner2.webp" class="d-block w-100" alt="幻燈片1" />
         <div class="carousel-caption d-none d-md-block">
           <router-link to="/userAllProducts" type="button" class="btn btn-dark text-light mb-5">
             點我前往
@@ -40,7 +40,7 @@
         </div>
       </div>
       <div class="banner-img carousel-item" data-bs-interval="5000">
-        <img src="../assets/img/banner1.webp" class="d-block w-100" alt="幻燈片2" />
+        <img src="../../assets/img/banner1.webp" class="d-block w-100" alt="幻燈片2" />
         <div class="carousel-caption d-none d-md-block">
           <router-link to="/userAllProducts" type="button" class="btn btn-dark text-light mb-5">
             點我前往
@@ -48,7 +48,7 @@
         </div>
       </div>
       <div class="banner-img carousel-item" data-bs-interval="5000">
-        <img src="../assets/img/banner3.webp" class="d-block w-100" alt="幻燈片3" />
+        <img src="../../assets/img/banner3.webp" class="d-block w-100" alt="幻燈片3" />
         <div class="carousel-caption d-none d-md-block">
           <router-link to="/userAllProducts" type="button" class="btn btn-dark text-light mb-5">
             點我前往
@@ -107,7 +107,7 @@
   <div class="container my-5 pt-1">
     <div class="row">
       <div class="col-md-6">
-        <img src="../assets/img/about.avif" class="mw-100 mb-2" alt="about1" />
+        <img src="../../assets/img/about.avif" class="mw-100 mb-2" alt="about1" />
       </div>
       <div class="col-md-4 m-auto">
         <h4 class="pb-md-2">天然舒適，簡約風格</h4>
@@ -118,7 +118,7 @@
     </div>
     <div class="row flex-row-reverse justify-content-between mt-4">
       <div class="col-md-6">
-        <img src="../assets/img/login2.0.jpg" class="mw-100 mb-2" alt="about1" />
+        <img src="../../assets/img/login2.0.jpg" class="mw-100 mb-2" alt="about1" />
       </div>
       <div class="col-md-4 m-auto">
         <h4 class="pb-md-2">多樣款式，韓國直送時尚</h4>
@@ -197,7 +197,7 @@ export default {
 }
 // introduction
 .introduction-container {
-  background-image: url("../assets/img/introductionImg.avif");
+  background-image: url("../../assets/img/introductionImg.avif");
   object-fit: cover;
   background-size: cover;
   background-position: center;

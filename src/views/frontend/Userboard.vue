@@ -9,9 +9,9 @@
 
 <script>
 import emitter from '@/methods/emitter';
-import UserNavbar from '../components/UserNavbar.vue';
-import UserFooter from '../components/UserFooter.vue';
-import ToastMessages from '../components/ToastMessages.vue';
+import UserNavbar from '../../components/frontend/UserNavbar.vue';
+import UserFooter from '../../components/frontend/UserFooter.vue';
+import ToastMessages from '../../components/ToastMessages.vue';
 
 export default {
   components: {

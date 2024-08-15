@@ -80,8 +80,8 @@
 </template>
 
 <script>
-import BackOrderModal from '@/components/BackOrderModal.vue';
-import DelModal from '@/components/DelModal.vue';
+import BackOrderModal from '@/components/backend/BackOrderModal.vue';
+import DelModal from '@/components/backend/DelModal.vue';
 import Pagination from '@/components/Pagination.vue';
 
 export default {

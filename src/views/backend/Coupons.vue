@@ -55,8 +55,8 @@
 </template>
 
 <script>
-import CouponModal from '@/components/CouponModal.vue';
-import DelModal from '@/components/DelModal.vue';
+import CouponModal from '@/components/backend/CouponModal.vue';
+import DelModal from '@/components/backend/DelModal.vue';
 import Pagination from '@/components/Pagination.vue';
 
 export default {

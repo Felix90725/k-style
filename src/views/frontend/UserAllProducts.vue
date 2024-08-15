@@ -293,7 +293,7 @@ export default {
 
 <style lang="scss" scoped>
 .product-banner {
-  background-image: url("../assets/img/product-banner.avif");
+  background-image: url("../../assets/img/product-banner.avif");
   min-height: 400px;
   object-fit: cover;
   background-size: cover;

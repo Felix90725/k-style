@@ -135,8 +135,8 @@ export default {
       this.$http
         .put(api, { data: paid })
         .then((res) => {
-          this.isLoading = false;
           this.getOrders(this.currentPage);
+          this.isLoading = false;
           this.$httpMessageState(res, '更新付款狀態');
         })
         .catch((err) => {
@@ -167,10 +167,10 @@ export default {
       this.$http
         .delete(api)
         .then((res) => {
-          this.isLoading = false;
-          this.$httpMessageState(res, '刪除表單');
           this.$refs.delModal.hideModal();
           this.getOrders(this.currentPage);
+          this.isLoading = false;
+          this.$httpMessageState(res, '刪除表單');
         })
         .catch((err) => {
           this.$httpMessageState(err, '連線錯誤，請再試一次');

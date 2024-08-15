@@ -166,8 +166,8 @@ export default {
       this.$http
         .get(api)
         .then((res) => {
-          this.isLoading = false;
           this.order = res.data.order;
+          this.isLoading = false;
         })
         .catch((err) => {
           this.$httpMessageState(err, '連線錯誤，請再試一次');
@@ -182,10 +182,10 @@ export default {
       this.$http
         .post(api, this.orderId)
         .then((res) => {
-          this.isLoading = false;
           emitter.emit('updateCart'); // 與 UserNavbar 同步更新
-          this.$httpMessageState(res, '付款');
           this.$router.push('/userFinish');
+          this.isLoading = false;
+          this.$httpMessageState(res, '付款');
         })
         .catch((err) => {
           this.$httpMessageState(err, '連線錯誤，請再試一次');

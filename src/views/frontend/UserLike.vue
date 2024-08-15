@@ -78,7 +78,6 @@ export default {
       this.$http
         .get(api)
         .then((res) => {
-          this.isLoading = false;
           // 過濾收藏的產品
           const filterFavorite = res.data.products
             .filter((product) => this.favoriteItems.includes(product.id));
@@ -86,6 +85,7 @@ export default {
           this.products = filterFavorite.sort(
             (a, b) => this.favoriteItems.indexOf(b.id) - this.favoriteItems.indexOf(a.id),
           );
+          this.isLoading = false;
         })
         .catch((err) => {
           this.$httpMessageState(err, '連線錯誤，請再試一次');
@@ -119,9 +119,9 @@ export default {
       this.$http
         .post(api, { data: cart })
         .then((res) => {
+          emitter.emit('updateCart'); // 與 UserNavbar 同步更新
           this.isLoading = false;
           this.$httpMessageState(res, '加入購物車');
-          emitter.emit('updateCart'); // 與 UserNavbar 同步更新
         })
         .catch((err) => {
           this.$httpMessageState(err, '連線錯誤，請再試一次');

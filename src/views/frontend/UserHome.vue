@@ -1,6 +1,7 @@
 <template>
   <!-- https://picsum.photos/1300/200?random=1 -->
   <!-- 輪播 banner -->
+  <isLoading :active="isLoading" />
   <div
     id="carouselExampleDark"
     class="carousel slide carousel-fade"
@@ -136,6 +137,7 @@ export default {
     return {
       products: {},
       topFourProducts: [],
+      isLoading: false,
     };
   },
   methods: {
@@ -144,9 +146,9 @@ export default {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
       this.isLoading = true;
       this.$http.get(api).then((res) => {
-        this.isLoading = false;
         this.products = res.data.products;
         this.topFourProducts = this.products.slice(0, 4);
+        this.isLoading = false;
       });
     },
   },

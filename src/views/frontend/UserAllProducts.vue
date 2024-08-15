@@ -191,9 +191,9 @@ export default {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
       this.isLoading = true;
       this.$http.get(api).then((res) => {
-        this.isLoading = false;
         this.products = res.data.products;
         this.filterProducts(page);
+        this.isLoading = false;
         this.scrollToTop();
       });
     },
@@ -262,9 +262,9 @@ export default {
       };
       this.status.loadingItem = id;
       this.$http.post(api, { data: cart }).then((res) => {
+        emitter.emit('updateCart'); // 與 UserNavbar 同步更新
         this.status.loadingItem = '';
         this.$httpMessageState(res, '加入購物車');
-        emitter.emit('updateCart'); // 與 UserNavbar 同步更新
       });
     },
 

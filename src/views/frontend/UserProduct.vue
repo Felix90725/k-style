@@ -185,9 +185,9 @@ export default {
       this.$http
         .get(api)
         .then((res) => {
-          this.isLoading = false;
           this.product = res.data.product;
           this.getAllProduct();
+          this.isLoading = false;
         })
         .catch((err) => {
           this.$httpMessageState(err, '連線錯誤，請再試一次');
@@ -207,15 +207,15 @@ export default {
       return this.$http
         .post(api, { data: cart })
         .then((res) => {
-          this.isLoading = false;
           this.status.loadingItem = '';
-          this.$httpMessageState(res, '加入購物車');
           emitter.emit('updateCart'); // 與 UserNavbar 同步更新
+          this.$httpMessageState(res, '加入購物車');
+          this.isLoading = false;
         })
         .catch((err) => {
-          this.isLoading = false;
           this.status.loadingItem = '';
           this.$httpMessageState(err, '連線錯誤，請再試一次');
+          this.isLoading = false;
         });
     },
 
@@ -264,9 +264,9 @@ export default {
       this.$http
         .get(api)
         .then((res) => {
-          this.isLoading = false;
           this.swiperData = res.data.products;
           this.filterProducts();
+          this.isLoading = false;
         })
         .catch((err) => {
           this.$httpMessageState(err, '連線錯誤，請再試一次');

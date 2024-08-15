@@ -200,8 +200,8 @@ export default {
       this.$http
         .post(api, { data: this.form })
         .then((res) => {
-          this.isLoading = false;
           this.$router.push(`/userPay/${res.data.orderId}`);
+          this.isLoading = false;
         })
         .catch((err) => {
           this.$httpMessageState(err, '連線錯誤，請再試一次');
@@ -216,8 +216,8 @@ export default {
       this.$http
         .get(api)
         .then((res) => {
-          this.isLoading = false;
           this.cart = res.data.data;
+          this.isLoading = false;
         })
         .catch((err) => {
           this.$httpMessageState(err, '連線錯誤，請再試一次');

@@ -60,10 +60,10 @@ export default {
       this.$http
         .get(api)
         .then((res) => {
-          this.isLoading = false;
           this.orders = res.data.orders;
           this.filteredOrders = this.orders
             .filter((order) => order.user.email === this.email); // 篩選
+          this.isLoading = false;
         })
         .catch((err) => {
           this.$httpMessageState(err, '連線錯誤，請再試一次');

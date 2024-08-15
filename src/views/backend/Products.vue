@@ -89,9 +89,9 @@ export default {
       this.$http
         .get(api)
         .then((res) => {
-          this.isLoading = false;
           this.products = res.data.products;
           this.pagination = res.data.pagination;
+          this.isLoading = false;
         })
         .catch((err) => {
           this.$httpMessageState(err, '連線錯誤，請再試一次');
@@ -154,10 +154,10 @@ export default {
       this.$http
         .delete(api)
         .then((res) => {
-          this.isLoading = false;
-          this.$httpMessageState(res, '刪除');
           this.getProducts();
           this.$refs.delModal.hideModal();
+          this.isLoading = false;
+          this.$httpMessageState(res, '刪除');
         })
         .catch((err) => {
           this.$httpMessageState(err, '連線錯誤，請再試一次');

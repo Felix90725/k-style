@@ -55,10 +55,10 @@ export default {
       this.$http
         .get(api)
         .then((res) => {
-          this.isLoading = false;
           this.orders = res.data.orders;
           this.filteredOrders = this.orders
             .filter((order) => order.user.email === this.email); // 篩選
+          this.isLoading = false;
           if (this.filteredOrders.length > 0) {
             this.$router.push(`/userCheckOrder/${this.email}`);
           } else {

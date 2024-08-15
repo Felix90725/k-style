@@ -88,9 +88,9 @@ export default {
       this.$http
         .get(api)
         .then((res) => {
-          this.isLoading = false;
           this.coupons = res.data.coupons;
           this.pagination = res.data.pagination;
+          this.isLoading = false;
         })
         .catch((err) => {
           this.$httpMessageState(err, '連線錯誤，請再試一次');
@@ -156,9 +156,9 @@ export default {
       this.$http
         .delete(api)
         .then((res) => {
-          this.isLoading = false;
           this.getCoupons();
           this.$refs.delModal.hideModal();
+          this.isLoading = false;
           this.$httpMessageState(res, '刪除優惠劵');
         })
         .catch((err) => {

@@ -223,9 +223,9 @@ export default {
       this.$http
         .get(api)
         .then((res) => {
-          this.isLoading = false;
           this.cart = res.data.data;
           this.addAllQty();
+          this.isLoading = false;
         })
         .catch((err) => {
           this.$httpMessageState(err, '連線錯誤，請再試一次');
@@ -254,10 +254,10 @@ export default {
       this.$http
         .put(api, { data: cart })
         .then((res) => {
-          this.isLoading = false;
           emitter.emit('updateCart'); // 與 navCart 同步更新
-          this.$httpMessageState(res, '更新數量');
           this.getCart();
+          this.isLoading = false;
+          this.$httpMessageState(res, '更新數量');
         })
         .catch((err) => {
           this.$httpMessageState(err, '連線錯誤，請再試一次');
@@ -292,11 +292,11 @@ export default {
         this.$http
           .delete(api)
           .then((res) => {
-            this.isLoading = false;
             emitter.emit('updateCart'); // 與 UserNavbar 同步更新
-            this.$httpMessageState(res, '刪除品項');
             this.$refs.delModal.hideModal();
             this.getCart();
+            this.isLoading = false;
+            this.$httpMessageState(res, '刪除品項');
           })
           .catch((err) => {
             this.$httpMessageState(err, '連線錯誤，請再試一次');
@@ -309,11 +309,11 @@ export default {
         this.$http
           .delete(api)
           .then((res) => {
-            this.isLoading = false;
             emitter.emit('updateCart'); // 與 UserNavbar 同步更新
-            this.$httpMessageState(res, '刪除購物車');
             this.$refs.userDelModal.hideModal();
             this.getCart();
+            this.isLoading = false;
+            this.$httpMessageState(res, '刪除購物車');
           })
           .catch((err) => {
             this.$httpMessageState(err, '連線錯誤，請再試一次');

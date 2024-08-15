@@ -1,5 +1,5 @@
 <template>
-  <isLoading :active="isLoading"/>
+  <isLoading :active="isLoading" />
   <div class="container p-lg-5 m-0 m-auto" style="min-height: 660px" v-if="products.length > 0">
     <h3 class="m-0 mb-4"><i class="bi bi-bag-heart me-2"></i>您的願望清單</h3>
     <table class="table" style="max-width: 1200px">
@@ -36,12 +36,12 @@
             </p>
           </td>
           <td class="addCartBtn align-middle text-center">
-            <button class="btn btn-dark rounded-0" @click="addCard(item.id)">
+            <button type="button" class="btn btn-dark rounded-0" @click="addCard(item.id)">
               <i class="fa-solid fa-cart-shopping me-2"></i>加入購物車
             </button>
           </td>
           <td class="align-middle text-center">
-            <button class="border-0 bg-white text-dark" @click="delFavorite(item)">
+            <button type="button" class="border-0 bg-white text-dark" @click="delFavorite(item)">
               <i class="fa-solid fa-trash-can" style="font-size: 20px"></i>
             </button>
           </td>
@@ -49,11 +49,11 @@
       </tbody>
     </table>
   </div>
-  <div class="text text-center p-5 m-5" style="min-height: 560px;" v-else>
-      <i class="bi bi-bag-heart my-5 pb-3" style="font-size: 110px"></i>
-      <h2 class="pt-4 pb-3">您的願望清單目前是空的唷~</h2>
-      <p class="p-3" style="font-size: 20px">趕快加入商品到願望清單吧~</p>
-      <router-link to="/userAllProducts" class="btn btn-dark mb-1">去逛逛</router-link>
+  <div class="text text-center p-5 m-5" style="min-height: 560px" v-else>
+    <i class="bi bi-bag-heart my-5 pb-3" style="font-size: 110px"></i>
+    <h2 class="pt-4 pb-3">您的願望清單目前是空的唷~</h2>
+    <p class="p-3" style="font-size: 20px">趕快加入商品到願望清單吧~</p>
+    <router-link to="/userAllProducts" class="btn btn-dark mb-1">去逛逛</router-link>
   </div>
 </template>
 
@@ -75,23 +75,30 @@ export default {
     getAllProducts() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
       this.isLoading = true;
-      this.$http.get(api).then((res) => {
-        this.isLoading = false;
-        // 過濾收藏的產品
-        const filterFavorite = res.data.products
-          .filter((product) => this.favoriteItems.includes(product.id));
-        // 根據 filterFavorite 的順序排序收藏產品
-        this.products = filterFavorite.sort(
-          (a, b) => this.favoriteItems.indexOf(b.id) - this.favoriteItems.indexOf(a.id),
-        );
-      });
+      this.$http
+        .get(api)
+        .then((res) => {
+          this.isLoading = false;
+          // 過濾收藏的產品
+          const filterFavorite = res.data.products
+            .filter((product) => this.favoriteItems.includes(product.id));
+          // 根據 filterFavorite 的順序排序收藏產品
+          this.products = filterFavorite.sort(
+            (a, b) => this.favoriteItems.indexOf(b.id) - this.favoriteItems.indexOf(a.id),
+          );
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+          this.isLoading = false;
+        });
     },
 
     // 移除愛心
     delFavorite(product) {
       if (this.favoriteItems.includes(product.id)) {
         this.favoriteItems.splice(this.favoriteItems.indexOf(product.id), 1); // 移除收藏
-        emitter.emit('push-message', { // toast
+        emitter.emit('push-message', {
+          // toast
           style: 'warning',
           title: '已從收藏清單中移除',
         });
@@ -109,11 +116,17 @@ export default {
         qty: 1,
       };
       this.isLoading = true;
-      this.$http.post(api, { data: cart }).then((res) => {
-        this.isLoading = false;
-        this.$httpMessageState(res, '加入購物車');
-        emitter.emit('updateCart'); // 與 UserNavbar 同步更新
-      });
+      this.$http
+        .post(api, { data: cart })
+        .then((res) => {
+          this.isLoading = false;
+          this.$httpMessageState(res, '加入購物車');
+          emitter.emit('updateCart'); // 與 UserNavbar 同步更新
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+          this.isLoading = false;
+        });
     },
 
     // 滾動到最上方
@@ -139,19 +152,19 @@ img {
 }
 
 @media screen and (max-width: 991px) {
-.addCartBtn{
-  padding: 0;
-  button{
-    width: 100%;
-    font-size: 14px;
+  .addCartBtn {
+    padding: 0;
+    button {
+      width: 100%;
+      font-size: 14px;
+    }
   }
-}
 }
 @media screen and (max-width: 767px) {
-  h5{
+  h5 {
     font-size: 24px;
   }
-  p{
+  p {
     font-size: 18px;
   }
   img {
@@ -159,9 +172,9 @@ img {
     height: 400px;
   }
   .table {
-    span{
+    span {
       font-size: 22px;
-      & + span{
+      & + span {
         margin-left: 5px;
       }
     }

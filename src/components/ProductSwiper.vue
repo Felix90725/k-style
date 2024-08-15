@@ -29,7 +29,8 @@
                 NT${{ $filters.currency(item.origin_price) }}
               </span>
               <span class="text-danger ms-1" v-if="item.price">
-                NT${{ $filters.currency(item.price) }}</span>
+                NT${{ $filters.currency(item.price) }}</span
+              >
             </span>
           </div>
         </a>
@@ -55,9 +56,14 @@ export default {
   methods: {
     // 前往單一商品頁面
     getProduct(id) {
-      this.$router.push(`/product/${id}`).then(() => {
-        this.$router.go(0); // 刷新頁面
-      });
+      this.$router
+        .push(`/product/${id}`)
+        .then(() => {
+          this.$router.go(0); // 刷新頁面
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+        });
     },
   },
   components: {

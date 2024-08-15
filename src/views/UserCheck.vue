@@ -1,6 +1,6 @@
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
-  <isLoading :active="isLoading"/>
+  <isLoading :active="isLoading" />
   <div class="container my-sm-5 pt-5">
     <div class="title">
       <h2 class="my-4 pb-4 text-center"><i class="bi bi-bag-check me-2"></i>購買訂單查詢</h2>
@@ -52,19 +52,27 @@ export default {
     searchOrder() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/orders`;
       this.isLoading = true;
-      this.$http.get(api).then((res) => {
-        this.isLoading = false;
-        this.orders = res.data.orders;
-        this.filteredOrders = this.orders.filter((order) => order.user.email === this.email); // 篩選
-        if (this.filteredOrders.length > 0) {
-          this.$router.push(`/userCheckOrder/${this.email}`);
-        } else {
-          emitter.emit('push-message', { // toast
-            style: 'danger',
-            title: '查無此訂單',
-          });
-        }
-      });
+      this.$http
+        .get(api)
+        .then((res) => {
+          this.isLoading = false;
+          this.orders = res.data.orders;
+          this.filteredOrders = this.orders
+            .filter((order) => order.user.email === this.email); // 篩選
+          if (this.filteredOrders.length > 0) {
+            this.$router.push(`/userCheckOrder/${this.email}`);
+          } else {
+            emitter.emit('push-message', {
+              // toast
+              style: 'danger',
+              title: '查無此訂單',
+            });
+          }
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+          this.isLoading = false;
+        });
     },
   },
 };

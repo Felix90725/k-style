@@ -238,9 +238,14 @@ export default {
       const formData = new FormData();
       formData.append('file-to-upload', uploadedFile);
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`;
-      this.$http.post(api, formData).then((res) => {
-        this.tempProduct.imageUrl = res.data.imageUrl;
-      });
+      this.$http
+        .post(api, formData)
+        .then((res) => {
+          this.tempProduct.imageUrl = res.data.imageUrl;
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+        });
     },
   },
   // 整合相同程式碼

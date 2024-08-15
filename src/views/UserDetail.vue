@@ -1,6 +1,6 @@
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
-  <isLoading :active="isLoading"/>
+  <isLoading :active="isLoading" />
   <div class="container my-5">
     <ol class="shoppingProcess d-flex justify-content-center align-items-center p-0 mb-5">
       <li>
@@ -197,20 +197,32 @@ export default {
     createOrder() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`;
       this.isLoading = true;
-      this.$http.post(api, { data: this.form }).then((res) => {
-        this.isLoading = false;
-        this.$router.push(`/userPay/${res.data.orderId}`);
-      });
+      this.$http
+        .post(api, { data: this.form })
+        .then((res) => {
+          this.isLoading = false;
+          this.$router.push(`/userPay/${res.data.orderId}`);
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+          this.isLoading = false;
+        });
     },
 
     // 取得購物車資料
     getCart() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
       this.isLoading = true;
-      this.$http.get(api).then((res) => {
-        this.isLoading = false;
-        this.cart = res.data.data;
-      });
+      this.$http
+        .get(api)
+        .then((res) => {
+          this.isLoading = false;
+          this.cart = res.data.data;
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+          this.isLoading = false;
+        });
     },
   },
   created() {

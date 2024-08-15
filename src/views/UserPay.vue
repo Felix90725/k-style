@@ -1,5 +1,5 @@
 <template>
-  <isLoading :active="isLoading"/>
+  <isLoading :active="isLoading" />
   <div class="container my-5">
     <ol class="shoppingProcess d-flex justify-content-center align-items-center p-0 mb-5">
       <li>
@@ -61,12 +61,8 @@
               </tr>
               <tr>
                 <th class="col-5">付款狀態</th>
-                <td class="col-7 fw-normal text-success" v-if="order.is_paid">
-                  已付款
-                </td>
-                <td class="col-7 fw-normal text-danger" v-else>
-                  尚未付款
-                </td>
+                <td class="col-7 fw-normal text-success" v-if="order.is_paid">已付款</td>
+                <td class="col-7 fw-normal text-danger" v-else>尚未付款</td>
               </tr>
               <tr>
                 <th class="col-5">姓名</th>
@@ -119,7 +115,7 @@
           </div>
           <div class="createOrder d-flex">
             <button
-              type="submit"
+              type="button"
               form="customerData"
               class="btn btn-dark w-100 rounded-0 rounded-bottom-2"
               @click="goToPay()"
@@ -151,22 +147,34 @@ export default {
     getOrder() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${this.orderId}`;
       this.isLoading = true;
-      this.$http.get(api).then((res) => {
-        this.isLoading = false;
-        this.order = res.data.order;
-      });
+      this.$http
+        .get(api)
+        .then((res) => {
+          this.isLoading = false;
+          this.order = res.data.order;
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+          this.isLoading = false;
+        });
     },
 
     // 結帳付款
     goToPay() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${this.orderId}`;
       this.isLoading = true;
-      this.$http.post(api, this.orderId).then((res) => {
-        this.isLoading = false;
-        emitter.emit('updateCart'); // 與 UserNavbar 同步更新
-        this.$httpMessageState(res, '付款');
-        this.$router.push('/userFinish');
-      });
+      this.$http
+        .post(api, this.orderId)
+        .then((res) => {
+          this.isLoading = false;
+          emitter.emit('updateCart'); // 與 UserNavbar 同步更新
+          this.$httpMessageState(res, '付款');
+          this.$router.push('/userFinish');
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+          this.isLoading = false;
+        });
     },
   },
   created() {

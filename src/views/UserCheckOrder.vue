@@ -1,5 +1,5 @@
 <template>
-  <isLoading :active="isLoading"/>
+  <isLoading :active="isLoading" />
   <div class="container my-5">
     <h2 class="pb-4"><i class="bi bi-card-checklist me-2"></i>您的購買清單</h2>
     <table class="table">
@@ -57,11 +57,18 @@ export default {
     getOrder(page = 1) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/orders?page=${page}`;
       this.isLoading = true;
-      this.$http.get(api).then((res) => {
-        this.isLoading = false;
-        this.orders = res.data.orders;
-        this.filteredOrders = this.orders.filter((order) => order.user.email === this.email); // 篩選
-      });
+      this.$http
+        .get(api)
+        .then((res) => {
+          this.isLoading = false;
+          this.orders = res.data.orders;
+          this.filteredOrders = this.orders
+            .filter((order) => order.user.email === this.email); // 篩選
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+          this.isLoading = false;
+        });
     },
 
     // 開啟詳細

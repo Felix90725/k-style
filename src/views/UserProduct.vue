@@ -182,11 +182,17 @@ export default {
     getProduct() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${this.id}`;
       this.isLoading = true;
-      this.$http.get(api).then((res) => {
-        this.isLoading = false;
-        this.product = res.data.product;
-        this.getAllProduct();
-      });
+      this.$http
+        .get(api)
+        .then((res) => {
+          this.isLoading = false;
+          this.product = res.data.product;
+          this.getAllProduct();
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+          this.isLoading = false;
+        });
     },
 
     // 加入購物車
@@ -206,21 +212,23 @@ export default {
           this.$httpMessageState(res, '加入購物車');
           emitter.emit('updateCart'); // 與 UserNavbar 同步更新
         })
-        .catch((error) => {
+        .catch((err) => {
           this.isLoading = false;
           this.status.loadingItem = '';
-          this.$httpMessageState(error, '加入購物車失敗');
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
         });
     },
 
     // 進入購物車介面
     goToCart(id) {
-      this.addCard(id).then(() => { // 確保addCard先執行完，回傳true
-        emitter.emit('updateCart'); // 與 UserNavbar 同步更新
-        this.$router.push('/userCart');
-      }).catch((error) => {
-        this.$httpMessageState(error, '加入購物車失敗');
-      });
+      this.addCard(id)
+        .then(() => { // 確保addCard先執行完，回傳true
+          emitter.emit('updateCart'); // 與 UserNavbar 同步更新
+          this.$router.push('/userCart');
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+        });
     },
 
     // 按鈕更新產品的數量
@@ -230,16 +238,14 @@ export default {
 
     // 愛心收藏切換
     toggleFavorite(product) {
-      if (this.favoriteItems.includes(product.id)) {
-        // 移除收藏
+      if (this.favoriteItems.includes(product.id)) { // 移除收藏
         this.favoriteItems.splice(this.favoriteItems.indexOf(product.id), 1);
         emitter.emit('push-message', {
           // toast
           style: 'warning',
           title: '已從收藏清單中移除',
         });
-      } else {
-        // 新增收藏
+      } else { // 新增收藏
         this.favoriteItems.push(product.id);
         emitter.emit('push-message', {
           // toast
@@ -255,11 +261,17 @@ export default {
     getAllProduct() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
       this.isLoading = true;
-      this.$http.get(api).then((res) => {
-        this.isLoading = false;
-        this.swiperData = res.data.products;
-        this.filterProducts();
-      });
+      this.$http
+        .get(api)
+        .then((res) => {
+          this.isLoading = false;
+          this.swiperData = res.data.products;
+          this.filterProducts();
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+          this.isLoading = false;
+        });
     },
 
     // 篩選出單一品項類型商品(swiper用)

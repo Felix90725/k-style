@@ -1,5 +1,5 @@
 <template>
-  <isLoading :active="isLoading"/>
+  <isLoading :active="isLoading" />
   <div class="text mt-3">
     <h4>訂單列表</h4>
   </div>
@@ -53,8 +53,14 @@
           </td>
           <td>
             <div class="btn-group">
-              <button class="btn btn-outline-primary btn-sm" @click="openModal(item)">檢視</button>
-              <button class="btn btn-outline-danger btn-sm" @click="openDelOrderModal(false, item)">
+              <button type="button" class="btn btn-outline-primary btn-sm" @click="openModal(item)">
+                檢視
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-danger btn-sm"
+                @click="openDelOrderModal(false, item)"
+              >
                 刪除
               </button>
             </div>
@@ -98,11 +104,17 @@ export default {
     getOrders(currentPage = 1) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders?page=${currentPage}`;
       this.isLoading = true;
-      this.$http.get(api, this.tempProduct).then((res) => {
-        this.orders = res.data.orders;
-        this.pagination = res.data.pagination;
-        this.isLoading = false;
-      });
+      this.$http
+        .get(api, this.tempProduct)
+        .then((res) => {
+          this.orders = res.data.orders;
+          this.pagination = res.data.pagination;
+          this.isLoading = false;
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+          this.isLoading = false;
+        });
     },
 
     // 開啟檢視
@@ -118,11 +130,17 @@ export default {
         is_paid: item.is_paid,
       };
       this.isLoading = true;
-      this.$http.put(api, { data: paid }).then((res) => {
-        this.isLoading = false;
-        this.getOrders(this.currentPage);
-        this.$httpMessageState(res, '更新付款狀態');
-      });
+      this.$http
+        .put(api, { data: paid })
+        .then((res) => {
+          this.isLoading = false;
+          this.getOrders(this.currentPage);
+          this.$httpMessageState(res, '更新付款狀態');
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+          this.isLoading = false;
+        });
     },
 
     // 開啟刪除 modal
@@ -142,13 +160,19 @@ export default {
         api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders/all`;
       }
       this.isLoading = true;
-      this.$http.delete(api).then((res) => {
-        this.isLoading = false;
-        this.$httpMessageState(res, '刪除表單');
-        this.$refs.delModal.hideModal();
-        this.$refs.backOrderModal.hideModal();
-        this.getOrders(this.currentPage);
-      });
+      this.$http
+        .delete(api)
+        .then((res) => {
+          this.isLoading = false;
+          this.$httpMessageState(res, '刪除表單');
+          this.$refs.delModal.hideModal();
+          this.$refs.backOrderModal.hideModal();
+          this.getOrders(this.currentPage);
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+          this.isLoading = false;
+        });
     },
   },
   created() {

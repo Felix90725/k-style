@@ -41,10 +41,16 @@ export default {
     logout() {
       const api = `${process.env.VUE_APP_API}logout`;
       this.isLoading = true;
-      this.$http.post(api, this.user).then(() => {
-        this.isLoading = false;
-        this.$router.push('/login');
-      });
+      this.$http
+        .post(api, this.user)
+        .then(() => {
+          this.isLoading = false;
+          this.$router.push('/login');
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+          this.isLoading = false;
+        });
     },
   },
 };

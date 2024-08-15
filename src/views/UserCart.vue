@@ -1,5 +1,5 @@
 <template>
-  <isLoading :active="isLoading"/>
+  <isLoading :active="isLoading" />
   <div class="container my-5">
     <ol class="shoppingProcess d-flex justify-content-center align-items-center p-0 mb-5">
       <li>
@@ -33,8 +33,10 @@
           <router-link to="/userAllProducts" class="btn btn-outline-secondary text-decoration-none"
             ><i class="fa-solid fa-arrow-left-long me-1"></i>繼續選購</router-link
           >
-          <button class="btn btn-outline-danger text-decoration-none ms-3"
-            @click.prevent="openDelProductModal(true)">
+          <button type="button"
+            class="btn btn-outline-danger text-decoration-none ms-3"
+            @click.prevent="openDelProductModal(true)"
+          >
             <i class="fa-regular fa-trash-can me-1"></i>清空購物車
           </button>
         </div>
@@ -95,7 +97,7 @@
                 >
               </td>
               <td>
-                <button
+                <button type="button"
                   class="border-0 bg-white text-dark"
                   @click="openDelProductModal(false, item)"
                 >
@@ -131,27 +133,28 @@
             </ul>
             <div class="coupons pt-3 pb-3 border-bottom">
               <p class="mb-4">限時優惠劵(全品項9折): <span class="text-danger">style2024</span></p>
-              <label for="coupons" class="input-group"><span class="mb-1">優惠劵</span>
-              <div class="input-group mb-2">
-                <input
-                  id="coupons"
-                  type="text"
-                  class="form-control rounded-start-1"
-                  placeholder="請輸入優惠碼"
-                  aria-label="coupons"
-                  aria-describedby="button-coupons"
-                  v-model="coupon_code"
-                />
-                <button
-                  class="btn btn-outline-secondary rounded-end-1 text-light border-0"
-                  type="button"
-                  id="button-coupons"
-                  @click="addCouponCode()"
-                >
-                  送出
-                </button>
-              </div>
-            </label>
+              <label for="coupons" class="input-group"
+                ><span class="mb-1">優惠劵</span>
+                <div class="input-group mb-2">
+                  <input
+                    id="coupons"
+                    type="text"
+                    class="form-control rounded-start-1"
+                    placeholder="請輸入優惠碼"
+                    aria-label="coupons"
+                    aria-describedby="button-coupons"
+                    v-model="coupon_code"
+                  />
+                  <button
+                    class="btn btn-outline-secondary rounded-end-1 text-light border-0"
+                    type="button"
+                    id="button-coupons"
+                    @click="addCouponCode()"
+                  >
+                    送出
+                  </button>
+                </div>
+              </label>
               <span class="text-danger" v-if="cart.total != cart.final_total">
                 {{ coupon_data.message }}
               </span>
@@ -217,11 +220,17 @@ export default {
     getCart() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
       this.isLoading = true;
-      this.$http.get(api).then((res) => {
-        this.isLoading = false;
-        this.cart = res.data.data;
-        this.addAllQty();
-      });
+      this.$http
+        .get(api)
+        .then((res) => {
+          this.isLoading = false;
+          this.cart = res.data.data;
+          this.addAllQty();
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+          this.isLoading = false;
+        });
     },
 
     // 按鈕更新產品的數量
@@ -242,12 +251,18 @@ export default {
         qty: item.qty,
       };
       this.isLoading = true;
-      this.$http.put(api, { data: cart }).then((res) => {
-        this.isLoading = false;
-        emitter.emit('updateCart'); // 與 navCart 同步更新
-        this.$httpMessageState(res, '更新數量');
-        this.getCart();
-      });
+      this.$http
+        .put(api, { data: cart })
+        .then((res) => {
+          this.isLoading = false;
+          emitter.emit('updateCart'); // 與 navCart 同步更新
+          this.$httpMessageState(res, '更新數量');
+          this.getCart();
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+          this.isLoading = false;
+        });
     },
 
     // 計算總數量
@@ -274,24 +289,36 @@ export default {
       if (this.tempCart.id) {
         const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${this.tempCart.id}`;
         this.isLoading = true;
-        this.$http.delete(api).then((res) => {
-          this.isLoading = false;
-          emitter.emit('updateCart'); // 與 UserNavbar 同步更新
-          this.$httpMessageState(res, '刪除品項');
-          this.$refs.delModal.hideModal();
-          this.getCart();
-        });
+        this.$http
+          .delete(api)
+          .then((res) => {
+            this.isLoading = false;
+            emitter.emit('updateCart'); // 與 UserNavbar 同步更新
+            this.$httpMessageState(res, '刪除品項');
+            this.$refs.delModal.hideModal();
+            this.getCart();
+          })
+          .catch((err) => {
+            this.$httpMessageState(err, '連線錯誤，請再試一次');
+            this.isLoading = false;
+          });
       } else {
         // 全部
         const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`;
         this.isLoading = true;
-        this.$http.delete(api).then((res) => {
-          this.isLoading = false;
-          emitter.emit('updateCart'); // 與 UserNavbar 同步更新
-          this.$httpMessageState(res, '刪除購物車');
-          this.$refs.userDelModal.hideModal();
-          this.getCart();
-        });
+        this.$http
+          .delete(api)
+          .then((res) => {
+            this.isLoading = false;
+            emitter.emit('updateCart'); // 與 UserNavbar 同步更新
+            this.$httpMessageState(res, '刪除購物車');
+            this.$refs.userDelModal.hideModal();
+            this.getCart();
+          })
+          .catch((err) => {
+            this.$httpMessageState(err, '連線錯誤，請再試一次');
+            this.isLoading = false;
+          });
       }
     },
 
@@ -301,10 +328,15 @@ export default {
       const coupon = {
         code: this.coupon_code,
       };
-      this.$http.post(api, { data: coupon }).then((res) => {
-        this.coupon_data = res.data;
-        this.getCart();
-      });
+      this.$http
+        .post(api, { data: coupon })
+        .then((res) => {
+          this.coupon_data = res.data;
+          this.getCart();
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+        });
     },
   },
   mounted() {

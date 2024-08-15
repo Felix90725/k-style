@@ -1,5 +1,5 @@
 <template>
-  <isLoading :active="isLoading"/>
+  <isLoading :active="isLoading" />
   <div class="text mt-3">
     <h4>優惠券列表</h4>
   </div>
@@ -30,11 +30,20 @@
         </td>
         <td>
           <div class="btn-group">
-            <button class="btn btn-outline-primary btn-sm" @click="openCouponModal(false, item)">
+            <button
+              type="button"
+              class="btn btn-outline-primary btn-sm"
+              @click="openCouponModal(false, item)"
+            >
               編輯
             </button>
-            <button class="btn btn-outline-danger btn-sm"
-            @click="openDelCouponModal(item)">刪除</button>
+            <button
+              type="button"
+              class="btn btn-outline-danger btn-sm"
+              @click="openDelCouponModal(item)"
+            >
+              刪除
+            </button>
           </div>
         </td>
       </tr>
@@ -76,11 +85,17 @@ export default {
     getCoupons(page = 1) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupons?page=${page}`;
       this.isLoading = true;
-      this.$http.get(api).then((res) => {
-        this.isLoading = false;
-        this.coupons = res.data.coupons;
-        this.pagination = res.data.pagination;
-      });
+      this.$http
+        .get(api)
+        .then((res) => {
+          this.isLoading = false;
+          this.coupons = res.data.coupons;
+          this.pagination = res.data.pagination;
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+          this.isLoading = false;
+        });
     },
 
     // 開啟新增 or 編輯 Modal
@@ -99,20 +114,32 @@ export default {
 
     // 新增 or 編輯遠端優惠劵
     updateCoupon() {
-      if (this.isNew) { // 新增
+      if (this.isNew) {
+        // 新增
         const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon`;
-        this.$http.post(api, { data: this.tempCoupon }).then((res) => {
-          this.getCoupons();
-          this.$refs.couponModal.hideModal();
-          this.$httpMessageState(res, '新增優惠劵');
-        });
-      } else { // 編輯
+        this.$http
+          .post(api, { data: this.tempCoupon })
+          .then((res) => {
+            this.getCoupons();
+            this.$refs.couponModal.hideModal();
+            this.$httpMessageState(res, '新增優惠劵');
+          })
+          .catch((err) => {
+            this.$httpMessageState(err, '連線錯誤，請再試一次');
+          });
+      } else {
+        // 編輯
         const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`;
-        this.$http.put(api, { data: this.tempCoupon }).then((res) => {
-          this.getCoupons();
-          this.$refs.couponModal.hideModal();
-          this.$httpMessageState(res, '編輯優惠劵');
-        });
+        this.$http
+          .put(api, { data: this.tempCoupon })
+          .then((res) => {
+            this.getCoupons();
+            this.$refs.couponModal.hideModal();
+            this.$httpMessageState(res, '編輯優惠劵');
+          })
+          .catch((err) => {
+            this.$httpMessageState(err, '連線錯誤，請再試一次');
+          });
       }
     },
 
@@ -126,12 +153,18 @@ export default {
     delCoupon() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`;
       this.isLoading = true;
-      this.$http.delete(api).then((res) => {
-        this.isLoading = false;
-        this.getCoupons();
-        this.$refs.delModal.hideModal();
-        this.$httpMessageState(res, '刪除優惠劵');
-      });
+      this.$http
+        .delete(api)
+        .then((res) => {
+          this.isLoading = false;
+          this.getCoupons();
+          this.$refs.delModal.hideModal();
+          this.$httpMessageState(res, '刪除優惠劵');
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+          this.isLoading = false;
+        });
     },
   },
   created() {

@@ -1,5 +1,5 @@
 <template>
-  <isLoading :active="isLoading"/>
+  <isLoading :active="isLoading" />
   <!-- 產品 banner -->
   <div
     class="product-banner container-fluid w-100 d-flex justify-content-center align-items-center"
@@ -115,8 +115,11 @@
                         style="font-size: 1.8rem"
                         v-if="favoriteItems.includes(item.id)"
                       ></i>
-                      <i class="fa-regular fa-heart text-danger"
-                      style="font-size: 1.8rem" v-else></i>
+                      <i
+                        class="fa-regular fa-heart text-danger"
+                        style="font-size: 1.8rem"
+                        v-else
+                      ></i>
                     </button>
                     <img :src="item.imageUrl" class="card-img-top rounded-0" alt="product" />
                     <div class="card-body p-3 rounded-0">
@@ -179,7 +182,8 @@ export default {
       isLoading: false,
       nowChoose: '全部商品',
       filteredProducts: [],
-      status: { // 加入購物車讀取效果
+      status: {
+        // 加入購物車讀取效果
         loadingItem: '', // 對應品項 id
       },
       favoriteItems: handleFavorites.get('myFavorite') || [], // 取得收藏商品
@@ -190,12 +194,18 @@ export default {
     getProducts(page = 1) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
       this.isLoading = true;
-      this.$http.get(api).then((res) => {
-        this.isLoading = false;
-        this.products = res.data.products;
-        this.filterProducts(page);
-        this.scrollToTop();
-      });
+      this.$http
+        .get(api)
+        .then((res) => {
+          this.isLoading = false;
+          this.products = res.data.products;
+          this.filterProducts(page);
+          this.scrollToTop();
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+          this.isLoading = false;
+        });
     },
 
     // 愛心收藏切換
@@ -208,7 +218,8 @@ export default {
         });
       } else { // 新增收藏
         this.favoriteItems.push(product.id);
-        emitter.emit('push-message', { // toast
+        emitter.emit('push-message', {
+          // toast
           style: 'success',
           title: '已新增至收藏清單',
         });
@@ -261,11 +272,16 @@ export default {
         qty: 1,
       };
       this.status.loadingItem = id;
-      this.$http.post(api, { data: cart }).then((res) => {
-        this.status.loadingItem = '';
-        this.$httpMessageState(res, '加入購物車');
-        emitter.emit('updateCart'); // 與 UserNavbar 同步更新
-      });
+      this.$http
+        .post(api, { data: cart })
+        .then((res) => {
+          this.status.loadingItem = '';
+          this.$httpMessageState(res, '加入購物車');
+          emitter.emit('updateCart'); // 與 UserNavbar 同步更新
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+        });
     },
 
     // 滾動到最上方

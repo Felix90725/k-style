@@ -1,5 +1,5 @@
 <template>
-  <isLoading :active="isLoading"/>
+  <isLoading :active="isLoading" />
   <UserNavbar></UserNavbar>
   <div class="kv">
     <div class="container h-100">
@@ -8,28 +8,30 @@
           <h2 class="h3 mb-3 font-weight-normal text-center border-bottom pb-3">管理員登入</h2>
           <div class="alert alert-danger d-block" role="alert" v-if="!loginError">登入失敗</div>
           <div class="mb-3">
-            <label for="inputEmail" class="d-block">Email
-            <input
-              type="email"
-              id="inputEmail"
-              class="form-control mt-2"
-              placeholder="請輸入電子郵件"
-              required
-              v-model="user.username"
-            />
-          </label>
+            <label for="inputEmail" class="d-block"
+              >Email
+              <input
+                type="email"
+                id="inputEmail"
+                class="form-control mt-2"
+                placeholder="請輸入電子郵件"
+                required
+                v-model="user.username"
+              />
+            </label>
           </div>
           <div class="mb-3">
-            <label for="inputPassword" class="d-block">Password
-            <input
-              type="password"
-              id="inputPassword"
-              class="form-control mt-2"
-              placeholder="請輸入密碼"
-              required
-              v-model="user.password"
-            />
-          </label>
+            <label for="inputPassword" class="d-block"
+              >Password
+              <input
+                type="password"
+                id="inputPassword"
+                class="form-control mt-2"
+                placeholder="請輸入密碼"
+                required
+                v-model="user.password"
+              />
+            </label>
           </div>
 
           <div class="text-end mt-4">
@@ -63,16 +65,22 @@ export default {
     signIn() {
       const api = `${process.env.VUE_APP_API}admin/signin`;
       this.isLoading = true;
-      this.$http.post(api, this.user).then((res) => {
-        if (res.data.success) {
-          const { token, expired } = res.data;
-          document.cookie = `hexToken=${token}; expires=${new Date(expired)}`;
-          this.$router.push('/backstage/control');
-        }
-        this.user.password = '';
-        this.loginError = false;
-        this.isLoading = false;
-      });
+      this.$http
+        .post(api, this.user)
+        .then((res) => {
+          if (res.data.success) {
+            const { token, expired } = res.data;
+            document.cookie = `hexToken=${token}; expires=${new Date(expired)}`;
+            this.$router.push('/backstage/control');
+          }
+          this.user.password = '';
+          this.loginError = false;
+          this.isLoading = false;
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+          this.isLoading = false;
+        });
     },
   },
 };

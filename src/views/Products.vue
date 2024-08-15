@@ -1,9 +1,9 @@
 <template>
-  <isLoading :active="isLoading"/>
+  <isLoading :active="isLoading" />
   <div class="text mt-3">
     <h4>產品列表</h4>
   </div>
-  <hr>
+  <hr />
   <div class="text-end pt-1">
     <button class="btn btn-warning text-white" type="button" @click="openModal(true)">
       建立新的產品
@@ -32,10 +32,18 @@
         </td>
         <td>
           <div class="btn-group">
-            <button class="btn btn-outline-primary btn-sm" @click="openModal(false, item)">
+            <button
+              type="button"
+              class="btn btn-outline-primary btn-sm"
+              @click="openModal(false, item)"
+            >
               編輯
             </button>
-            <button class="btn btn-outline-danger btn-sm" @click="openDelProductModal(item)">
+            <button
+              type="button"
+              class="btn btn-outline-danger btn-sm"
+              @click="openDelProductModal(item)"
+            >
               刪除
             </button>
           </div>
@@ -78,11 +86,17 @@ export default {
     getProducts(page = 1) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`;
       this.isLoading = true;
-      this.$http.get(api).then((res) => {
-        this.isLoading = false;
-        this.products = res.data.products;
-        this.pagination = res.data.pagination;
-      });
+      this.$http
+        .get(api)
+        .then((res) => {
+          this.isLoading = false;
+          this.products = res.data.products;
+          this.pagination = res.data.pagination;
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+          this.isLoading = false;
+        });
     },
 
     // 開啟建立新的產品 or 編輯
@@ -109,17 +123,22 @@ export default {
         httpMethod = 'put';
       }
       const productComponent = this.$refs.productModal;
-      this.$http[httpMethod](api, { data: this.tempProduct }).then((res) => {
-        productComponent.hideModal();
-        this.getProducts();
-        if (res.data.success && !this.isNew) { // 加入訊息回饋
-          this.$httpMessageState(res, '編輯');
-        } else if (res.data.success) {
-          this.$httpMessageState(res, '新增');
-        } else {
-          this.$httpMessageState(res, '新增');
-        }
-      });
+      this.$http[httpMethod](api, { data: this.tempProduct })
+        .then((res) => {
+          productComponent.hideModal();
+          this.getProducts();
+          if (res.data.success && !this.isNew) {
+            // 加入訊息回饋
+            this.$httpMessageState(res, '編輯');
+          } else if (res.data.success) {
+            this.$httpMessageState(res, '新增');
+          } else {
+            this.$httpMessageState(res, '新增');
+          }
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+        });
     },
 
     // 開啟刪除 Modal
@@ -132,12 +151,18 @@ export default {
     delProduct() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${this.tempProduct.id}`;
       this.isLoading = true;
-      this.$http.delete(api).then((res) => {
-        this.isLoading = false;
-        this.$httpMessageState(res, '刪除');
-        this.getProducts();
-        this.$refs.delModal.hideModal();
-      });
+      this.$http
+        .delete(api)
+        .then((res) => {
+          this.isLoading = false;
+          this.$httpMessageState(res, '刪除');
+          this.getProducts();
+          this.$refs.delModal.hideModal();
+        })
+        .catch((err) => {
+          this.$httpMessageState(err, '連線錯誤，請再試一次');
+          this.isLoading = false;
+        });
     },
   },
   created() {

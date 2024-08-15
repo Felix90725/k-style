@@ -5,7 +5,8 @@
   </div>
   <hr />
   <div class="text-end pt-1">
-    <button class="btn btn-outline-danger" type="button" @click="openDelOrderModal(true)">
+    <button class="btn btn-outline-danger" type="button" @click="openDelOrderModal(true)"
+    v-if="orders.length">
       刪除全部訂單
     </button>
   </div>
@@ -121,6 +122,7 @@ export default {
     openModal(item) {
       this.tempOrder = { ...item };
       this.$refs.backOrderModal.showModal();
+      this.isAllOrder = false;
     },
 
     // 更新付款狀態
@@ -149,8 +151,10 @@ export default {
         this.tempOrder = {};
       } else {
         this.tempOrder = { ...item };
+        this.isAllOrder = false;
       }
       this.$refs.delModal.showModal();
+      this.$refs.backOrderModal.hideModal();
     },
 
     // 確認刪除
@@ -166,7 +170,6 @@ export default {
           this.isLoading = false;
           this.$httpMessageState(res, '刪除表單');
           this.$refs.delModal.hideModal();
-          this.$refs.backOrderModal.hideModal();
           this.getOrders(this.currentPage);
         })
         .catch((err) => {

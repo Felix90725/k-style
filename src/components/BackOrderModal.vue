@@ -31,11 +31,27 @@
                   </tr>
                   <tr>
                     <th>Email</th>
-                    <td>{{ tempOrder.user.email }}</td>
+                    <td>
+                      <a
+                        class="text-decoration-none"
+                        :href="`mailto:${tempOrder.user.email}`"
+                        style="color: #000000"
+                      >
+                        {{ tempOrder.user.email }}
+                      </a>
+                    </td>
                   </tr>
                   <tr>
                     <th>電話</th>
-                    <td>{{ tempOrder.user.tel }}</td>
+                    <td>
+                      <a
+                        class="text-decoration-none"
+                        :href="`tel:${tempOrder.user.tel}`"
+                        style="color: #000000"
+                      >
+                        {{ tempOrder.user.tel }}
+                      </a>
+                    </td>
                   </tr>
                   <tr>
                     <th>地址</th>
@@ -96,11 +112,6 @@
               </table>
             </div>
           </div>
-        </div>
-        <div class="modal-footer bg-warning">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-          <button type="button" class="btn btn-danger"
-          @click="$emit('del-order', tempOrder)">刪除</button>
         </div>
       </div>
     </div>

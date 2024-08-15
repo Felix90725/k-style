@@ -31,11 +31,27 @@
                   </tr>
                   <tr>
                     <th>Email</th>
-                    <td>{{ order.user.email }}</td>
+                    <td>
+                      <a
+                        class="text-decoration-none"
+                        :href="`mailto:${order.user.email}`"
+                        style="color: #000000"
+                      >
+                        {{ order.user.email }}
+                      </a>
+                    </td>
                   </tr>
                   <tr>
                     <th>電話</th>
-                    <td>{{ order.user.tel }}</td>
+                    <td>
+                      <a
+                        class="text-decoration-none"
+                        :href="`tel:${order.user.tel}`"
+                        style="color: #000000"
+                      >
+                        {{ order.user.tel }}
+                      </a>
+                    </td>
                   </tr>
                   <tr>
                     <th>地址</th>

@@ -70,11 +70,27 @@
               </tr>
               <tr>
                 <th class="col-5">電話</th>
-                <td class="col-7" v-if="order.user">{{ order.user.tel }}</td>
+                <td class="col-7" v-if="order.user">
+                  <a
+                    class="text-decoration-none"
+                    :href="`tel:${ order.user.tel }`"
+                    style="color: #000000"
+                  >
+                    {{ order.user.tel }}
+                  </a>
+                </td>
               </tr>
               <tr>
                 <th class="col-5">電子郵件</th>
-                <td class="col-7" v-if="order.user">{{ order.user.email }}</td>
+                <td class="col-7" v-if="order.user">
+                  <a
+                    class="text-decoration-none"
+                    :href="`mailto:${order.user.email}`"
+                    style="color: #000000"
+                  >
+                    {{ order.user.email }}
+                  </a>
+                </td>
               </tr>
               <tr>
                 <th class="col-5">收件地址</th>

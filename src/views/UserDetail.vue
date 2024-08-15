@@ -31,7 +31,7 @@
       <div class="col-12 col-lg-8">
         <h3><i class="fa-solid fa-user me-2"></i>顧客資料</h3>
         <div class="customerData">
-          <v-form v-slot="{ errors }" id="customerData" @submit="createOrder()">
+          <v-form v-slot="{ errors }" id="customerData" @submit="createOrder">
             <div class="my-3">
               <label for="name" class="form-label mb-2"
                 >姓名 <span class="text-danger">*</span></label

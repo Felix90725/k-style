@@ -47,7 +47,7 @@
                     id="customFile"
                     class="img-input form-control mt-1"
                     ref="fileInput"
-                    @change="uploadFile()"
+                    @change="uploadFile"
                   />
                 </label>
               </div>

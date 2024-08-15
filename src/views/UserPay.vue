@@ -134,7 +134,7 @@
               type="button"
               form="customerData"
               class="btn btn-dark w-100 rounded-0 rounded-bottom-2"
-              @click="goToPay()"
+              @click="goToPay"
             >
               進行付款
             </button>

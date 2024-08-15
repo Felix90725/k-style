@@ -149,7 +149,7 @@
                     class="btn btn-outline-secondary rounded-end-1 text-light border-0"
                     type="button"
                     id="button-coupons"
-                    @click="addCouponCode()"
+                    @click="addCouponCode"
                   >
                     送出
                   </button>

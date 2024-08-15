@@ -5,7 +5,7 @@
     <div class="title">
       <h2 class="my-4 pb-4 text-center"><i class="bi bi-bag-check me-2"></i>購買訂單查詢</h2>
     </div>
-    <v-form v-slot="{ errors }" id="customerData" @submit="searchOrder()">
+    <v-form v-slot="{ errors }" id="customerData" @submit="searchOrder">
       <label for="email" class="form-label mb-2 mt-6"
         >Email <span class="text-danger">*</span></label
       >

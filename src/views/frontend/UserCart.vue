@@ -33,7 +33,8 @@
           <router-link to="/userAllProducts" class="btn btn-outline-secondary text-decoration-none"
             ><i class="fa-solid fa-arrow-left-long me-1"></i>繼續選購</router-link
           >
-          <button type="button"
+          <button
+            type="button"
             class="btn btn-outline-danger text-decoration-none ms-3"
             @click.prevent="openDelProductModal(true)"
           >
@@ -64,17 +65,19 @@
                       type="button"
                       id="button-addon1"
                       style="width: 35px; height: 35px"
+                      :disabled="item.qty === 1"
                       @click="updateQuantity(item, -1)"
                     >
                       <i class="fas fa-minus"></i>
                     </button>
                   </div>
                   <input
-                    type="text"
-                    class="countInput form-control form-control-sm text-center
-                    m-0 shadow-nonebg-light"
+                    type="number"
+                    class="countInput form-control form-control-sm
+                    text-center m-0 shadow-nonebg-light"
                     aria-label="Example text with button addon"
                     value="1"
+                    @input="checkQuantity(item)"
                     @change="updateCart(item)"
                     v-model.number="item.qty"
                   />
@@ -99,7 +102,8 @@
                 >
               </td>
               <td>
-                <button type="button"
+                <button
+                  type="button"
                   class="border-0 bg-white text-dark"
                   @click="openDelProductModal(false, item)"
                 >
@@ -245,6 +249,14 @@ export default {
       }
     },
 
+    // 檢查數量是否小於 1
+    checkQuantity(item) {
+      if (item.qty < 1) {
+        // eslint-disable-next-line no-param-reassign
+        item.qty = 1;
+      }
+    },
+
     // 更新購物車
     updateCart(item) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
@@ -348,6 +360,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/* 隱藏數字輸入框的上下箭頭 */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox 隱藏箭頭 */
+}
+
 p {
   font-size: 14px;
 }

@@ -80,13 +80,14 @@
                 </button>
               </div>
               <input
-                type="text"
+                type="number"
                 class="form-control border-0 text-center m-0 shadow-none bg-light"
                 placeholder=""
                 aria-label="Example text with button addon"
                 aria-describedby="button-addon1"
                 value="1"
                 v-model.number="productQty"
+                @input="checkQuantity"
               />
               <div class="input-group-append">
                 <button
@@ -222,7 +223,8 @@ export default {
     // 進入購物車介面
     goToCart(id) {
       this.addCard(id)
-        .then(() => { // 確保addCard先執行完，回傳true
+        .then(() => {
+          // 確保addCard先執行完，回傳true
           emitter.emit('updateCart'); // 與 UserNavbar 同步更新
           this.$router.push('/userCart');
         })
@@ -236,16 +238,25 @@ export default {
       this.productQty += number;
     },
 
+    // 檢查數量是否小於 1
+    checkQuantity() {
+      if (this.productQty < 1) {
+        this.productQty = 1;
+      }
+    },
+
     // 愛心收藏切換
     toggleFavorite(product) {
-      if (this.favoriteItems.includes(product.id)) { // 移除收藏
+      if (this.favoriteItems.includes(product.id)) {
+        // 移除收藏
         this.favoriteItems.splice(this.favoriteItems.indexOf(product.id), 1);
         emitter.emit('push-message', {
           // toast
           style: 'warning',
           title: '已從收藏清單中移除',
         });
-      } else { // 新增收藏
+      } else {
+        // 新增收藏
         this.favoriteItems.push(product.id);
         emitter.emit('push-message', {
           // toast
@@ -298,6 +309,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/* 隱藏數字輸入框的上下箭頭 */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox 隱藏箭頭 */
+}
+
 .product-img {
   object-fit: cover;
   overflow: hidden;

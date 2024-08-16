@@ -83,7 +83,8 @@
     <div class="card-row row row-cols-1 row-cols-md-2 row-cols-lg-4 g-5">
       <div class="col" v-for="item in topFourProducts" :key="item.id">
         <router-link :to="`product/${item.id}`" class="card m-auto text-decoration-none">
-          <img :src="item.imageUrl" class="card-img card-img-top" alt="card1" />
+          <img :src="item.imageUrl" class="card-img card-img-top rounded-1
+          rounded-bottom-0" alt="card1" />
           <div class="card-body">
             <h5>{{ item.title }}</h5>
             <p class="card-text">
@@ -101,7 +102,7 @@
     <div class="introduction-filter"></div>
     <div class="introduction-txt text-light text-center pt-4">
       <h3>韓國代購</h3>
-      <p>正韓 x 舒適 x 穿搭</p>
+      <p>正韓 × 舒適 × 穿搭</p>
     </div>
   </div>
   <!-- 關於 about -->
@@ -184,11 +185,12 @@ export default {
   .card {
     border: 0;
     transition: all 0.5s 0s ease;
-    box-shadow: 0px 0px 6px rgba(121, 121, 121, 0.3);
+    box-shadow: 0px 0px 6px rgba(121, 121, 121, .2);
     &:hover {
       transform: scale(1.1);
-      background-color: #bebebe;
-      box-shadow: 0px 0px 6px rgb(121, 121, 121);
+      background-color: #e9e9e9;
+      box-shadow: 0px 0px 3px rgb(121, 121, 121, .2);
+      backdrop-filter: invert(10%);
     }
   }
   .card-img {

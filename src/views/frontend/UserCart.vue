@@ -56,10 +56,11 @@
                 <span class="ms-md-3 mt-2">{{ item.product.title }}</span>
               </td>
               <td class="pe-4">
-                <div class="input-group bg-warning">
+                <div class="input-group bg-warning rounded-1">
                   <div class="input-group-prepend">
                     <button
-                      class="btn btn-sm btn-outline-secondary text-light border-0 py-2 rounded-0"
+                      class="btn btn-sm btn-outline-secondary text-light
+                      border-0 py-2 rounded-1 rounded-end-0"
                       type="button"
                       id="button-addon1"
                       style="width: 35px; height: 35px"
@@ -79,7 +80,8 @@
                   />
                   <div class="input-group-append">
                     <button
-                      class="btn btn-sm btn-outline-secondary text-light border-0 py-2 rounded-0"
+                      class="btn btn-sm btn-outline-secondary text-light
+                      border-0 py-2 rounded-1 rounded-start-0"
                       type="button"
                       id="button-addon2"
                       style="width: 35px; height: 35px"
@@ -132,7 +134,7 @@
               </li>
             </ul>
             <div class="coupons pt-3 pb-3 border-bottom">
-              <p class="mb-4">限時優惠劵(全品項9折): <span class="text-danger">style2024</span></p>
+              <p class="mb-4">限時優惠劵(全品項9折)：<span class="text-danger">style2024</span></p>
               <label for="coupons" class="input-group"
                 ><span class="mb-1">優惠劵</span>
                 <div class="input-group mb-2">
@@ -184,8 +186,8 @@
     </div>
     <div class="text text-center p-5 m-5" style="min-height: 400px" v-else>
       <i class="fa-solid fa-cart-plus me-3 mt-5" style="font-size: 90px"></i>
-      <h2 class="pt-4 pb-3">您的購物車目前是空的唷~</h2>
-      <p class="p-3" style="font-size: 20px">趕快加入商品到購物車!!!</p>
+      <h2 class="pt-4 pb-3">您的購物車目前是空的唷～</h2>
+      <p class="p-3" style="font-size: 20px">趕快加入商品到購物車！！！</p>
       <router-link to="/userAllProducts" class="btn btn-dark mb-1">繼續選購</router-link>
     </div>
   </div>

@@ -65,7 +65,7 @@
           </div>
         </div>
         <div class="row">
-          <p class="mt-3">數量:</p>
+          <p class="mt-3">數量：</p>
           <div class="col-7">
             <div class="input-group bg-warning">
               <div class="input-group-prepend">
@@ -136,10 +136,10 @@
     </div>
 
     <div class="Precautions mt-2 col-md-6 text-secondary">
-      <p class="m-1">商品說明:</p>
+      <p class="m-1">商品說明：</p>
       <ul>
         <li>
-          商品顏色因環境光線(太陽光、室內光等..)及螢幕顯示器不同容易產生色差
+          商品顏色因環境光線(太陽光、室內光等‥)及螢幕顯示器不同容易產生色差
           ，廠商均努力呈現商品最真實的顏色，實際顏色已收到的商品為主。
         </li>
         <li>

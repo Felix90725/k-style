@@ -98,7 +98,7 @@
               </tr>
               <tr class="remark">
                 <th colspan="2">
-                  訂單備註 : <span class="fw-normal">{{ order.message }}</span>
+                  訂單備註：<span class="fw-normal">{{ order.message }}</span>
                 </th>
               </tr>
             </tbody>
@@ -117,7 +117,7 @@
             </div>
             <div class="orderAbout mb-5">
               <h5 class="pb-2 m-0">請選擇付款方式</h5>
-              <select class="form-select mt-3" aria-label="Default select example">
+              <select class="form-select mt-3 rounded-1" aria-label="Default select example">
                 <option selected value="1">信用卡付款</option>
                 <option value="2">貨到付款</option>
                 <option value="3">ibon付款</option>
@@ -208,7 +208,8 @@ p {
 .orderDetails,
 .orderData {
   border: 1px solid #888888;
-  box-shadow: 3px 3px 3px #d1d1d1;
+  box-shadow: 3px 3px 3px rgb(209, 209, 209, 0.4);
+  backdrop-filter: blur(5px);
   border-radius: 5px;
   table {
     table-layout: fixed; // 表格佈局設定為固定

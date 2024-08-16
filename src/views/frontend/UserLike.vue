@@ -36,7 +36,7 @@
             </p>
           </td>
           <td class="addCartBtn align-middle text-center">
-            <button type="button" class="btn btn-dark rounded-0" @click="addCard(item.id)">
+            <button type="button" class="btn btn-dark rounded-1" @click="addCard(item.id)">
               <i class="fa-solid fa-cart-shopping me-2"></i>加入購物車
             </button>
           </td>
@@ -51,8 +51,8 @@
   </div>
   <div class="text text-center p-5 m-5" style="min-height: 560px" v-else>
     <i class="bi bi-bag-heart my-5 pb-3" style="font-size: 110px"></i>
-    <h2 class="pt-4 pb-3">您的願望清單目前是空的唷~</h2>
-    <p class="p-3" style="font-size: 20px">趕快加入商品到願望清單吧~</p>
+    <h2 class="pt-4 pb-3">您的願望清單目前是空的唷～</h2>
+    <p class="p-3" style="font-size: 20px">趕快加入商品到願望清單吧～</p>
     <router-link to="/userAllProducts" class="btn btn-dark mb-1">去逛逛</router-link>
   </div>
 </template>

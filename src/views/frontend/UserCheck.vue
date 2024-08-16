@@ -14,23 +14,24 @@
           id="email"
           name="email"
           type="email"
-          class="form-control"
+          class="form-control rounded-1 rounded-end-0"
           placeholder="請輸入 Email"
           :class="{ 'is-invalid': errors['email'] }"
           rules="email|required"
           v-model="email"
         ></v-field>
-        <button class="btn btn-outline-secondary" type="submit" form="customerData">查詢</button>
+        <button class="btn btn-outline-secondary rounded-1 rounded-start-0"
+        type="submit" form="customerData">查詢</button>
         <error-message name="email" class="invalid-feedback"></error-message>
       </div>
     </v-form>
     <div class="checkAbout">
       <h5 class="pt-5">訂單出貨說明：</h5>
       <ul class="py-2">
-        <li>商品均由韓國代購並空運，訂單確認後需7~15個備貨工作天寄出。</li>
-        <li>備貨期間如遇商品缺貨、工廠原料不足將再多7~21個工作天。</li>
+        <li>商品均由韓國代購並空運，訂單確認後需7～15個備貨工作天寄出。</li>
+        <li>備貨期間如遇商品缺貨、工廠原料不足將再多7～21個工作天。</li>
         <li>連續假期、航班延誤或清關延遲將導致配送延誤，請參考首頁公告</li>
-        <li>如購買過程及收到商品有任何問題，歡迎聯繫我們， 我們會盡快回覆您。</li>
+        <li>如購買過程及收到商品有任何問題，歡迎聯繫我們，我們會盡快回覆您。</li>
       </ul>
     </div>
   </div>

@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light sticky-top">
     <div class="container">
-      <a class="logoLink navbar-brand" href="#">K-style </a>
+      <router-link to="/" class="logoLink navbar-brand">K-style</router-link>
       <button
         class="navbar-toggler"
         type="button"
@@ -15,7 +15,6 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="navbar-nav ms-auto">
-          <router-link to="/" exact-active-class="active" class="nav-link me-3">首頁</router-link>
           <router-link to="/userAllProducts" class="nav-link me-3">所有商品</router-link>
           <router-link to="/userCheck" class="nav-link me-3">訂單查詢</router-link>
           <router-link to="/userLike" class="nav-link me-3 position-relative">

@@ -40,7 +40,7 @@
                 id="name"
                 name="顧客姓名"
                 type="text"
-                class="form-control"
+                class="form-control rounded-1"
                 placeholder="請輸入您的姓名"
                 :class="{ 'is-invalid': errors['顧客姓名'] }"
                 rules="required"
@@ -56,7 +56,7 @@
                 id="phone"
                 name="phone"
                 type="text"
-                class="form-control"
+                class="form-control rounded-1"
                 placeholder="請輸入您的手機電話號碼"
                 :class="{ 'is-invalid': errors['phone'] }"
                 :rules="isPhone"
@@ -72,7 +72,7 @@
                 id="email"
                 name="email"
                 type="email"
-                class="form-control"
+                class="form-control rounded-1"
                 placeholder="請輸入 Email"
                 :class="{ 'is-invalid': errors['email'] }"
                 rules="email|required"
@@ -88,7 +88,7 @@
                 id="address"
                 name="收件地址"
                 type="address"
-                class="form-control"
+                class="form-control rounded-1"
                 placeholder="請輸入收件地址"
                 :class="{ 'is-invalid': errors['收件地址'] }"
                 rules="required"
@@ -100,7 +100,7 @@
               <label for="message" class="form-label mb-2">訂單備註</label>
               <textarea
                 type="text"
-                class="form-control"
+                class="form-control rounded-1"
                 id="message"
                 v-model="form.message"
                 style="min-height: 150px"
@@ -288,7 +288,7 @@ input {
   &:focus {
     border: 1px solid #888888;
     outline: none;
-    box-shadow: 0px 0px 3px #666666;
+    box-shadow: 0px 0px 3px rgb(121, 121, 121, .3);
     border-radius: 3px;
   }
 }
@@ -299,7 +299,7 @@ textarea {
   &:focus {
     border: 1px solid #888888;
     outline: none;
-    box-shadow: 0px 0px 3px #666666;
+    box-shadow: 0px 0px 3px rgb(121, 121, 121, .3);
     border-radius: 3px;
   }
 }

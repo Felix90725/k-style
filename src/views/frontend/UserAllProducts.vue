@@ -103,7 +103,7 @@
                   class="product-card-link text-decoration-none position-relative"
                   @click.prevent="getProduct(item.id)"
                 >
-                  <div class="card border-0 position-relative rounded-0">
+                  <div class="card border-0 position-relative rounded-1">
                     <!-- 愛心按鈕 -->
                     <button
                       type="button"
@@ -118,7 +118,8 @@
                       <i class="fa-regular fa-heart text-danger"
                       style="font-size: 1.8rem" v-else></i>
                     </button>
-                    <img :src="item.imageUrl" class="card-img-top rounded-0" alt="product" />
+                    <img :src="item.imageUrl" class="card-img-top rounded-1
+                    rounded-bottom-0" alt="product" />
                     <div class="card-body p-3 rounded-0">
                       <h5 class="mt-1 mb-0">{{ item.title }}</h5>
                       <p class="card-text mt-2">
@@ -139,7 +140,7 @@
                 </a>
                 <button
                   type="button"
-                  class="product-card-btn btn btn-dark rounded-0"
+                  class="product-card-btn btn btn-dark rounded-1"
                   :disabled="this.status.loadingItem === item.id"
                   @click="addCard(item.id)"
                 >
@@ -339,7 +340,7 @@ export default {
   position: relative;
   transition: all 0.3s ease;
   &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 5px rgb(121, 121, 121, .4);
   }
   img {
     height: 350px;

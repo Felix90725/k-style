@@ -20,7 +20,7 @@
       <div class="product-img col-md-5">
         <img :src="product.imageUrl" alt="product1" />
       </div>
-      <div class="col-md-6 mx-auto">
+      <div class="col-md-7 mx-auto position-relative">
         <div class="product-title">
           <h2 class="mt-2 mt-md-0">{{ product.title }}</h2>
         </div>
@@ -38,20 +38,22 @@
           </h4>
         </div>
         <div class="product-description mt-3">
-          <div class="description mt-3" v-if="product.description">
+          <div class="description my-3" v-if="product.description">
             <span class="about">【DESCRIPTION】</span>
             <p class="m-0 ms-2" style="white-space: pre-line">
               <!-- 控制空白處理方式 -->
               {{ product.description }}
             </p>
           </div>
-          <div class="size pt-3">
-            <span>【SIZE(cm)】</span>
-            <p class="m-0 ms-2">{{ product.size }}</p>
-          </div>
-          <div class="model-size pt-3">
-            <span>【MODEL SIZE】</span>
-            <p class="m-0 ms-2">{{ product.model_size }}</p>
+          <div class="row mb-3">
+            <div class="size col-6 pt-3">
+              <span>【SIZE(cm)】</span>
+              <p class="m-0 ms-2">{{ product.size }}</p>
+            </div>
+            <div class="model-size col-6 pt-3">
+              <span>【MODEL SIZE】</span>
+              <p class="m-0 ms-2">{{ product.model_size }}</p>
+            </div>
           </div>
           <div class="row mb-3">
             <div class="content col-6 pt-3">
@@ -101,7 +103,7 @@
               </div>
             </div>
           </div>
-          <div class="col-5 d-flex align-items-center justify-content-end">
+          <div class="heart position-absolute">
             <button type="button" class="btn border-0" @click="toggleFavorite(product)">
               <i
                 class="fa-solid fa-heart text-danger"
@@ -136,7 +138,7 @@
       </div>
     </div>
 
-    <div class="Precautions mt-2 col-md-6 text-secondary">
+    <div class="Precautions mt-4 col-md-6 text-secondary">
       <p class="m-1">商品說明：</p>
       <ul>
         <li>
@@ -149,7 +151,7 @@
       </ul>
     </div>
     <h3 class="mt-5 text-center">我們也推薦</h3>
-    <div class="container mb-2">
+    <div class="container mb-4">
       <ProductSwiper :product="filteredSwiper"></ProductSwiper>
     </div>
   </div>
@@ -325,10 +327,14 @@ input[type="number"]::-webkit-inner-spin-button {
   }
 }
 .product-title {
-  border-bottom: 1px solid #666666;
+  border-bottom: 1px solid #bebebe;
 }
 .product-description {
-  border-top: 1px solid #666666;
-  border-bottom: 1px solid #666666;
+  border-top: 1px solid #bebebe;
+  border-bottom: 1px solid #bebebe;
+}
+.heart{
+  left: 90%;
+  top: 0;
 }
 </style>

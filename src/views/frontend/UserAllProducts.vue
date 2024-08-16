@@ -23,13 +23,10 @@
               class="card-header px-0 py-4 bg-white border border-bottom-0
               border-top border-start-0 border-end-0 rounded-0"
               id="headingOne"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseOne"
               aria-expanded="true"
             >
               <div class="d-flex justify-content-between align-items-center pe-1">
                 <h4 class="mb-0">商品分類</h4>
-                <i class="fas fa-chevron-down"></i>
               </div>
             </div>
             <div
@@ -96,7 +93,7 @@
         <h3 class="ms-2 mb-0">{{ nowChoose }}</h3>
         <div class="container-fluid w-100">
           <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gx-5">
-            <div class="col mt-4 pb-3" v-for="item in filteredProducts" :key="item.id">
+            <div class="col mt-4 pb-4" v-for="item in filteredProducts" :key="item.id">
               <div class="right-card">
                 <a
                   href="#"
@@ -140,7 +137,7 @@
                 </a>
                 <button
                   type="button"
-                  class="product-card-btn btn btn-dark rounded-1"
+                  class="product-card-btn btn btn-dark rounded-1 rounded-top-0"
                   :disabled="this.status.loadingItem === item.id"
                   @click="addCard(item.id)"
                 >
@@ -338,10 +335,6 @@ export default {
     z-index: 99;
   }
   position: relative;
-  transition: all 0.3s ease;
-  &:hover {
-    box-shadow: 0px 0px 5px rgb(121, 121, 121, .4);
-  }
   img {
     height: 350px;
     object-fit: cover;
@@ -352,13 +345,15 @@ export default {
 }
 .right-card {
   position: relative;
+  box-shadow: 0px 0px 5px rgb(121, 121, 121, .3);
   .product-card-btn {
     position: absolute;
     bottom: 0;
     right: 0;
     left: 0;
-    margin: 5px;
+    margin: 0px;
     z-index: 10;
+    box-shadow: 0px 0px 5px rgb(121, 121, 121, .3);
   }
 }
 

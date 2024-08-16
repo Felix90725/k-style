@@ -1,20 +1,20 @@
 <template>
-  <div class="container my-5">
-    <ol class="shoppingProcess d-flex justify-content-center align-items-center p-0 mb-5">
+  <div class="container mt-5 pb-4">
+    <ol class="shoppingProcess d-flex justify-content-center align-items-center p-0 mb-4 mt-2">
       <li>
-        <span class="active">1</span>
+        <span>1</span>
         <h5 class="my-2">購物車</h5>
         <p class="text-warning">請確認您的商品</p>
       </li>
       <i class="bi bi-arrow-right"></i>
       <li>
-        <span class="active">2</span>
+        <span>2</span>
         <h5 class="my-2">填寫資料</h5>
         <p class="text-warning">填寫訂購人相關資料</p>
       </li>
       <i class="bi bi-arrow-right"></i>
       <li>
-        <span class="active">3</span>
+        <span>3</span>
         <h5 class="my-2">訂單付款</h5>
         <p class="text-warning">確認資料並付款</p>
       </li>
@@ -26,7 +26,7 @@
       </li>
     </ol>
   </div>
-  <div class="text text-center p-sm-3 m-sm-5 pb-5" style="min-height: 400px;" >
+  <div class="text text-center p-sm-3 m-sm-0 pb-5" style="min-height: 500px;" >
     <i class="bi bi-bag-check-fill" style="font-size: 90px"></i>
     <h2 class="pt-4 pb-3">您的訂單已成功付款！</h2>
     <p class="p-3" style="font-size: 20px">
@@ -42,6 +42,9 @@ p {
   font-size: 14px;
 }
 .shoppingProcess {
+  h5{
+    font-size: 18px;
+  }
   list-style: none;
   li {
     display: flex;
@@ -53,11 +56,11 @@ p {
       color: #fff;
     }
     span {
-      width: 40px;
-      height: 40px;
+      width: 35px;
+      height: 35px;
       border-radius: 50%;
       color: #424242;
-      font-size: 22px;
+      font-size: 20px;
       border: 2px solid #424242;
       display: flex;
       justify-content: center;

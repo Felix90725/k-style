@@ -1,10 +1,10 @@
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
   <isLoading :active="isLoading" />
-  <div class="container my-5">
-    <ol class="shoppingProcess d-flex justify-content-center align-items-center p-0 mb-5">
+  <div class="container my-5 pb-4">
+    <ol class="shoppingProcess d-flex justify-content-center align-items-center p-0 mb-4 mt-2">
       <li>
-        <span class="active">1</span>
+        <span>1</span>
         <h5 class="my-2">購物車</h5>
         <p class="text-warning">請確認您的商品</p>
       </li>
@@ -254,6 +254,9 @@ p {
   }
 }
 .shoppingProcess {
+  h5{
+    font-size: 18px;
+  }
   list-style: none;
   li {
     display: flex;
@@ -265,11 +268,11 @@ p {
       color: #fff;
     }
     span {
-      width: 40px;
-      height: 40px;
+      width: 35px;
+      height: 35px;
       border-radius: 50%;
       color: #424242;
-      font-size: 22px;
+      font-size: 20px;
       border: 2px solid #424242;
       display: flex;
       justify-content: center;

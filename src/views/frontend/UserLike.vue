@@ -17,7 +17,8 @@
           <td class="ps-md-0"><img :src="item.imageUrl" :alt="item.title" /></td>
           <td class="align-middle pb-0 pb-md-2">
             <h5 class="mb-2">{{ item.title }}</h5>
-            <p class="m-0">分類:{{ item.category }}</p>
+            <span class="m-0 p-1 px-2 rounded-1 text-dark"
+            style="font-size: 14px; background-color: #E9E9E9;">{{ item.category }}</span>
           </td>
           <td class="align-middle ps-lg-3 pt-0 pt-md-2">
             <p class="card-text mt-2">

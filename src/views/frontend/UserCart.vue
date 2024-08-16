@@ -1,7 +1,7 @@
 <template>
   <isLoading :active="isLoading" />
-  <div class="container my-5">
-    <ol class="shoppingProcess d-flex justify-content-center align-items-center p-0 mb-5">
+  <div class="container my-5 pb-4">
+    <ol class="shoppingProcess d-flex justify-content-center align-items-center p-0 mb-4 mt-2">
       <li>
         <span class="active">1</span>
         <h5 class="my-2">購物車</h5>
@@ -73,8 +73,8 @@
                   </div>
                   <input
                     type="number"
-                    class="countInput form-control form-control-sm
-                    text-center m-0 shadow-nonebg-light"
+                    class="countInput form-control form-control-sm text-center
+                    m-0 shadow-nonebg-light"
                     aria-label="Example text with button addon"
                     value="1"
                     @input="checkQuantity(item)"
@@ -120,27 +120,29 @@
           <div class="card-body p-3 border">
             <ul class="list-unstyled border-bottom m-0 pb-3">
               <li class="d-flex align-items-center justify-content-between mb-4 mt-2">
-                <h5 class="m-0 fw-normal">商品總數</h5>
+                <h5 class="m-0">商品總數</h5>
                 <span class="m-0 fw-normal">{{ allQty }} 項</span>
               </li>
               <li class="d-flex align-items-center justify-content-between">
-                <h5 class="m-0 fw-normal">小計</h5>
+                <h5 class="m-0">小計</h5>
                 <span class="m-0 fw-normal">NT$ {{ $filters.currency(cart.total) }}</span>
               </li>
               <li
                 class="d-flex align-items-center justify-content-between text-danger mt-2"
                 v-if="cart.total != cart.final_total"
               >
-                <h5 class="m-0 fw-normal">折價劵折扣</h5>
+                <h5 class="m-0">折價劵折扣</h5>
                 <span class="m-0 fw-normal">
                   -NT$ {{ $filters.currency(cart.total - cart.final_total) }}
                 </span>
               </li>
             </ul>
             <div class="coupons pt-3 pb-3 border-bottom">
-              <p class="mb-4">限時優惠劵(全品項9折)：<span class="text-danger">style2024</span></p>
+              <h5 class="mb-4">
+                限時優惠劵(全品項9折)： <span class="text-danger fw-normal">style2024</span>
+              </h5>
               <label for="coupons" class="input-group"
-                ><span class="mb-1">優惠劵</span>
+                ><h5 class="mb-2">優惠劵</h5>
                 <div class="input-group mb-2">
                   <input
                     id="coupons"
@@ -169,11 +171,11 @@
               class="total d-flex align-items-center justify-content-between mt-3"
               v-if="cart.total != cart.final_total"
             >
-              <h5 class="m-0 fw-normal">合計(包含折扣)</h5>
+              <h5 class="m-0">合計(包含折扣)</h5>
               <span class="m-0 fw-normal">NT$ {{ $filters.currency(cart.final_total) }}</span>
             </div>
             <div class="total d-flex align-items-center justify-content-between mt-3" v-else>
-              <h5 class="m-0 fw-normal">合計</h5>
+              <h5 class="m-0">合計</h5>
               <span class="m-0 fw-normal">NT$ {{ $filters.currency(cart.final_total) }}</span>
             </div>
           </div>
@@ -345,7 +347,17 @@ export default {
       this.$http
         .post(api, { data: coupon })
         .then((res) => {
-          this.coupon_data = res.data;
+          if (res.data.success === false) {
+            emitter.emit('push-message', {
+              style: 'danger',
+              title: '找不到優惠劵!',
+            });
+            this.coupon_code = '';
+          } else this.coupon_data = res.data;
+          emitter.emit('push-message', {
+            style: 'success',
+            title: '優惠劵套用成功!',
+          });
           this.getCart();
         })
         .catch((err) => {
@@ -376,6 +388,9 @@ img {
   object-fit: cover;
 }
 .shoppingProcess {
+  h5{
+    font-size: 18px;
+  }
   list-style: none;
   li {
     display: flex;
@@ -387,11 +402,11 @@ img {
       color: #fff;
     }
     span {
-      width: 40px;
-      height: 40px;
+      width: 35px;
+      height: 35px;
       border-radius: 50%;
       color: #424242;
-      font-size: 22px;
+      font-size: 20px;
       border: 2px solid #424242;
       display: flex;
       justify-content: center;

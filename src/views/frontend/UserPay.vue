@@ -1,15 +1,15 @@
 <template>
   <isLoading :active="isLoading" />
   <div class="container my-5">
-    <ol class="shoppingProcess d-flex justify-content-center align-items-center p-0 mb-5">
+    <ol class="shoppingProcess d-flex justify-content-center align-items-center p-0 mb-4 mt-2">
       <li>
-        <span class="active">1</span>
+        <span>1</span>
         <h5 class="my-2">購物車</h5>
         <p class="text-warning">請確認您的商品</p>
       </li>
       <i class="bi bi-arrow-right"></i>
       <li>
-        <span class="active">2</span>
+        <span>2</span>
         <h5 class="my-2">填寫資料</h5>
         <p class="text-warning">填寫訂購人相關資料</p>
       </li>
@@ -28,7 +28,7 @@
     </ol>
     <div class="row">
       <div class="col-12 col-lg-8">
-        <div class="orderDetails me-md-4 mb-5 p-3 p-md-4">
+        <div class="orderDetails me-md-4 mb-3 p-3 p-md-4">
           <h4 class="mb-3">訂單明細</h4>
           <table class="table">
             <thead>
@@ -224,10 +224,10 @@ p {
 .cart-total {
   .orderAbout {
     h5 {
-      border-bottom: 1px solid #888888;
+      border-bottom: 1px solid #dee2e6;
     }
     select {
-      border: 1px solid #888888;
+      border: 1px solid #dee2e6;
       border-radius: 0;
       &:focus {
         outline: none;
@@ -245,6 +245,9 @@ p {
   }
 }
 .shoppingProcess {
+  h5{
+    font-size: 18px;
+  }
   list-style: none;
   li {
     display: flex;
@@ -256,11 +259,11 @@ p {
       color: #fff;
     }
     span {
-      width: 40px;
-      height: 40px;
+      width: 35px;
+      height: 35px;
       border-radius: 50%;
       color: #424242;
-      font-size: 22px;
+      font-size: 20px;
       border: 2px solid #424242;
       display: flex;
       justify-content: center;

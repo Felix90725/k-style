@@ -33,25 +33,52 @@
 
     <div class="carousel-inner">
       <div class="banner-img carousel-item active" data-bs-interval="5000">
-        <img src="../../assets/img/banner2.webp" class="d-block w-100" alt="幻燈片1" />
-        <div class="carousel-caption d-none d-md-block">
-          <router-link to="/userAllProducts" type="button" class="btn btn-dark text-light mb-5">
+        <img
+          src="../../assets/img/banner2.webp"
+          class="d-block w-100 position-relative"
+          alt="幻燈片1"
+        />
+        <div class="carousel-caption d-none d-md-block position-absolute" style="top: 60%">
+          <router-link
+            to="/userAllProducts"
+            type="button"
+            class="btn text-light"
+            style="background-color: coral"
+          >
             點我前往
           </router-link>
         </div>
       </div>
       <div class="banner-img carousel-item" data-bs-interval="5000">
-        <img src="../../assets/img/banner1.webp" class="d-block w-100" alt="幻燈片2" />
-        <div class="carousel-caption d-none d-md-block">
-          <router-link to="/userAllProducts" type="button" class="btn btn-dark text-light mb-5">
+        <img
+          src="../../assets/img/banner1.webp"
+          class="d-block w-100 position-relative"
+          alt="幻燈片2"
+        />
+        <div class="carousel-caption d-none d-md-block position-absolute" style="top: 60%">
+          <router-link
+            to="/userAllProducts"
+            type="button"
+            class="btn text-light"
+            style="background-color: coral"
+          >
             點我前往
           </router-link>
         </div>
       </div>
       <div class="banner-img carousel-item" data-bs-interval="5000">
-        <img src="../../assets/img/banner3.webp" class="d-block w-100" alt="幻燈片3" />
-        <div class="carousel-caption d-none d-md-block">
-          <router-link to="/userAllProducts" type="button" class="btn btn-dark text-light mb-5">
+        <img
+          src="../../assets/img/banner3.webp"
+          class="d-block w-100 position-relative"
+          alt="幻燈片3"
+        />
+        <div class="carousel-caption d-none d-md-block position-absolute" style="top: 60%">
+          <router-link
+            to="/userAllProducts"
+            type="button"
+            class="btn text-light"
+            style="background-color: coral"
+          >
             點我前往
           </router-link>
         </div>
@@ -78,13 +105,16 @@
     </button>
   </div>
   <!-- 熱銷商品 card -->
-  <div class="card-container container mt-5">
+  <div class="card-container container my-5 py-4">
     <h3 class="text-center">熱銷商品</h3>
     <div class="card-row row row-cols-1 row-cols-md-2 row-cols-lg-4 g-5">
       <div class="col" v-for="item in topFourProducts" :key="item.id">
         <router-link :to="`product/${item.id}`" class="card m-auto text-decoration-none">
-          <img :src="item.imageUrl" class="card-img card-img-top rounded-1
-          rounded-bottom-0" alt="card1" />
+          <img
+            :src="item.imageUrl"
+            class="card-img card-img-top rounded-1 rounded-bottom-0"
+            alt="card1"
+          />
           <div class="card-body">
             <h5>{{ item.title }}</h5>
             <p class="card-text">
@@ -98,7 +128,7 @@
     </div>
   </div>
   <!-- 簡介 introduction -->
-  <div class="introduction-container container-fluid mt-5">
+  <div class="introduction-container container-fluid">
     <div class="introduction-filter"></div>
     <div class="introduction-txt text-light text-center pt-4">
       <h3>韓國代購</h3>
@@ -106,7 +136,7 @@
     </div>
   </div>
   <!-- 關於 about -->
-  <div class="container my-5 pt-1">
+  <div class="container my-5 py-4">
     <div class="row">
       <div class="col-md-6">
         <img src="../../assets/img/about.avif" class="mw-100 mb-2" alt="about1" />
@@ -130,15 +160,46 @@
       </div>
     </div>
   </div>
+  <!-- 訂閱 -->
+  <div class="container pb-4">
+    <div class="title">
+      <h2 class="pb-4"><i class="fa-solid fa-bullhorn me-2"></i>訂閱我們，獲取最新活動消息</h2>
+    </div>
+    <v-form v-slot="{ errors }" id="customerData" @submit="subscription">
+      <div class="input-group mb-3">
+        <v-field
+          id="email"
+          name="email"
+          type="email"
+          class="form-control rounded-1 rounded-end-0"
+          placeholder="輸入您的信箱，獲得優惠劵與最新活動消息"
+          :class="{ 'is-invalid': errors['email'] }"
+          rules="email|required"
+          v-model="email"
+        ></v-field>
+        <button
+          class="btn btn-outline-secondary rounded-1 rounded-start-0"
+          type="submit"
+          form="customerData"
+        >
+          訂閱
+        </button>
+        <error-message name="email" class="invalid-feedback"></error-message>
+      </div>
+    </v-form>
+  </div>
 </template>
 
 <script>
+import emitter from '@/methods/emitter';
+
 export default {
   data() {
     return {
       products: {},
       topFourProducts: [],
       isLoading: false,
+      email: '',
     };
   },
   methods: {
@@ -152,9 +213,26 @@ export default {
         this.isLoading = false;
       });
     },
+
+    subscription() {
+      emitter.emit('push-message', {
+        style: 'success',
+        title: `${this.email}訂閱成功`,
+      });
+      this.email = '';
+    },
+
+    // 滾動到最上方
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    },
   },
   created() {
     this.getProducts();
+    this.scrollToTop();
   },
 };
 </script>
@@ -162,7 +240,7 @@ export default {
 <style lang="scss" scoped>
 .banner-img {
   position: relative;
-  height: 100vh;
+  height: 92.5vh;
 }
 .banner-img img {
   position: absolute;
@@ -185,11 +263,11 @@ export default {
   .card {
     border: 0;
     transition: all 0.5s 0s ease;
-    box-shadow: 0px 0px 6px rgba(121, 121, 121, .2);
+    box-shadow: 0px 0px 6px rgba(121, 121, 121, 0.2);
     &:hover {
       transform: scale(1.1);
       background-color: #e9e9e9;
-      box-shadow: 0px 0px 3px rgb(121, 121, 121, .2);
+      box-shadow: 0px 0px 3px rgb(121, 121, 121, 0.2);
       backdrop-filter: invert(10%);
     }
   }
@@ -224,6 +302,20 @@ export default {
   }
   .introduction-txt {
     font-size: 26px;
+  }
+}
+
+// 訂閱
+input {
+  border: 1px solid #888888;
+  border-radius: 0;
+  border-bottom: 1px solid #888888;
+  box-shadow: 0;
+  &:focus {
+    border: 1px solid #888888;
+    outline: none;
+    box-shadow: 0px 0px 1px #666666;
+    border-radius: 3px;
   }
 }
 

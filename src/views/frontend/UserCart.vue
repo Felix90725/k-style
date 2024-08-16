@@ -367,10 +367,6 @@ input[type="number"]::-webkit-inner-spin-button {
   margin: 0;
 }
 
-input[type="number"] {
-  -moz-appearance: textfield; /* Firefox 隱藏箭頭 */
-}
-
 p {
   font-size: 14px;
 }

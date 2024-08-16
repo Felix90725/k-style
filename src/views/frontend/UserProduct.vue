@@ -11,7 +11,7 @@
           <a href="#/userAllProducts" class="text-secondary text-decoration-none">產品</a>
         </li>
         <li class="breadcrumb-item text-secondary active" aria-current="page">
-          {{ product.title }}
+          <span style="color: coral">{{ product.title }}</span>
         </li>
       </ol>
     </nav>
@@ -314,10 +314,6 @@ input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
-
-input[type="number"] {
-  -moz-appearance: textfield; /* Firefox 隱藏箭頭 */
 }
 
 .product-img {

@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-dark text-light py-md-4 py-1">
+  <div class="bg-dark text-light py-4">
     <div class="container">
       <div class="d-flex align-content-center justify-content-between
-      text-white mb-mb-7 mb-md-5 mt-3">
+      text-white mb-mb-7 mb-md-5 my-3 mt-0">
         <a href="#" class="logo text-white text-decoration-none h4">K-style</a>
         <ul class="d-flex align-items-center list-unstyled h4 mb-0">
           <li class="px-3">
@@ -42,12 +42,12 @@
           <p class="mb-md-0">© 2024 Yan-Fu Lin. All Rights Reserved.</p>
         </div>
         <div class="mb-md-0 mb-1">
-          <p class="mb-0 text-md-center">
+          <p class="mb-0">
             <router-link to="/login" class="backLogin text-light text-decoration-none">管理員登入
               <i class="fa-solid fa-arrow-right"></i>
             </router-link>
           </p>
-          <p class="mb-md-0 text-md-center">此網頁為學習使用，不做任何商業用途。</p>
+          <p class="m-0">此網頁為學習使用，不做任何商業用途。</p>
         </div>
       </div>
     </div>

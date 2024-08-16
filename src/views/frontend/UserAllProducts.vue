@@ -93,10 +93,10 @@
       </div>
       <!-- 右側產品卡 product-card -->
       <div class="col-lg-9 m-auto">
-        <h3 class="ms-2 mb-4">{{ nowChoose }}</h3>
+        <h3 class="ms-2 mb-0">{{ nowChoose }}</h3>
         <div class="container-fluid w-100">
           <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gx-5">
-            <div class="col mb-4" v-for="item in filteredProducts" :key="item.id">
+            <div class="col mt-4 pb-3" v-for="item in filteredProducts" :key="item.id">
               <div class="right-card">
                 <a
                   href="#"
@@ -157,7 +157,7 @@
             </div>
           </div>
         </div>
-        <Pagination :pages="pagination" @emit-pages="getProducts" class="p-3 pt-0"></Pagination>
+        <Pagination :pages="pagination" @emit-pages="getProducts" class="p-3 pt-2"></Pagination>
       </div>
     </div>
   </div>

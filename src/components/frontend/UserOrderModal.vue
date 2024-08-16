@@ -21,7 +21,7 @@
         </div>
         <div class="modal-body">
           <div class="row">
-            <div class="col-12">
+            <div class="col-12 mb-4">
               <h3>用戶資料</h3>
               <table class="table">
                 <tbody v-if="order.user">
@@ -60,7 +60,7 @@
                 </tbody>
               </table>
             </div>
-            <div class="col-12">
+            <div class="col-12 mb-4">
               <h3>訂單細節</h3>
               <table class="table">
                 <tbody>
@@ -96,6 +96,8 @@
                   </tr>
                 </tbody>
               </table>
+            </div>
+            <div class="col-12">
               <h3>選購商品</h3>
               <table class="table">
                 <tbody>
@@ -108,9 +110,6 @@
               </table>
             </div>
           </div>
-        </div>
-        <div class="modal-footer bg-warning">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
         </div>
       </div>
     </div>

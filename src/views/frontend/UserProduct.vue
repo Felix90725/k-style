@@ -68,7 +68,7 @@
         </div>
         <div class="row">
           <p class="mt-3">數量：</p>
-          <div class="col-7">
+          <div class="col-12">
             <div class="input-group bg-warning">
               <div class="input-group-prepend">
                 <button
@@ -336,5 +336,29 @@ input[type="number"]::-webkit-inner-spin-button {
 .heart{
   left: 90%;
   top: 0;
+}
+@media screen and (max-width: 1199px) {
+    .heart{
+    left: 87%;
+    top: 0;
+  }
+}
+@media screen and (max-width: 991px) {
+    .heart{
+    left: 83%;
+    top: 0;
+  }
+}
+@media screen and (max-width: 767px) {
+    .heart{
+    left: 86%;
+    top: 5px;
+  }
+}
+@media screen and (max-width: 430px) {
+    .heart{
+    left: 81.5%;
+    top: 0;
+  }
 }
 </style>

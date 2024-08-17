@@ -3,6 +3,7 @@
     <div class="container">
       <router-link to="/" class="logoLink navbar-brand">K-style</router-link>
       <button
+        id="routerToggler"
         class="navbar-toggler"
         type="button"
         data-bs-toggle="collapse"
@@ -10,18 +11,26 @@
         aria-controls="navbarNavAltMarkup"
         aria-expanded="false"
         aria-label="Toggle navigation"
+        ref="navbarBtn"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="navbar-nav ms-auto">
-          <router-link to="/userAllProducts" class="nav-link me-3">所有商品</router-link>
-          <router-link to="/userCheck" class="nav-link me-3">訂單查詢</router-link>
-          <router-link to="/userLike" class="nav-link me-3 position-relative">
+          <router-link to="/" class="homeLink nav-link me-3" @click="closeNavbar"
+            >首頁</router-link
+          >
+          <router-link to="/userAllProducts" class="nav-link me-3" @click="closeNavbar"
+            >所有商品</router-link
+          >
+          <router-link to="/userCheck" class="nav-link me-3" @click="closeNavbar"
+            >訂單查詢</router-link
+          >
+          <router-link to="/userLike" class="nav-link me-3 position-relative" @click="closeNavbar">
             <i class="fa-solid fa-heart" style="font-size: 18px"></i>
             <span
-              class="position-absolute top-0 start-100 translate-middle badge
-              rounded-circle bg-danger mt-2"
+              class="linkNumbers position-absolute translate-middle
+              badge rounded-circle bg-danger mt-2"
               v-if="favoriteItems.length > 0"
             >
               {{ favoriteItems.length }}
@@ -29,11 +38,11 @@
             </span>
           </router-link>
 
-          <router-link to="/userCart" class="nav-link me-3 position-relative">
+          <router-link to="/userCart" class="nav-link me-3 position-relative" @click="closeNavbar">
             <i class="fa-solid fa-cart-shopping" style="font-size: 18px"></i>
             <span
-              class="position-absolute top-0 start-100 translate-middle badge
-              rounded-circle bg-danger mt-2"
+              class="linkNumbers position-absolute translate-middle
+              badge rounded-circle bg-danger mt-2"
               v-if="carts.length > 0"
             >
               {{ cartsNum }}
@@ -75,6 +84,13 @@ export default {
     getFavorite() {
       this.favoriteItems = handleFavorites.get();
     },
+
+    // 關閉選單
+    closeNavbar() {
+      if (document.body.offsetWidth < 992) {
+        this.$refs.navbarBtn.click();
+      }
+    },
   },
   computed: {
     // 取得愛心收藏數量
@@ -101,6 +117,41 @@ nav {
   min-height: 70px;
   .logoLink {
     font-size: 28px;
+  }
+  .linkNumbers {
+    top: 0;
+    right: -60%;
+  }
+  .homeLink {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  nav {
+    .linkNumbers {
+      top: 0px;
+      right: 93%;
+    }
+    .homeLink{
+      display: block;
+    }
+  }
+}
+@media screen and (max-width: 767px) {
+  nav {
+    .linkNumbers {
+      top: 0px;
+      right: 91%;
+    }
+  }
+}
+@media screen and (max-width: 430px) {
+  nav {
+    .linkNumbers {
+      top: 0px;
+      right: 87%;
+    }
   }
 }
 </style>

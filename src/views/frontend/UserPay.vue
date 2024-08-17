@@ -197,6 +197,7 @@ export default {
     // 取得訂單ID
     this.orderId = this.$route.params.order_id;
     this.getOrder();
+    emitter.emit('updateCart'); // 與 UserNavbar 同步更新
   },
 };
 </script>
@@ -213,6 +214,9 @@ p {
   border-radius: 5px;
   table {
     table-layout: fixed; // 表格佈局設定為固定
+  }
+  td{
+    word-wrap: break-word; // 自動換行防止溢出
   }
 
   .remark {

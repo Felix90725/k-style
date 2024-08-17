@@ -81,9 +81,6 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  h2 {
-    font-size: 65px;
-  }
   max-width: 700px;
   min-height: 600px;
 }
@@ -102,9 +99,6 @@ input {
 @media screen and (max-width: 576px) {
   .container {
     margin: 0;
-    h2 {
-      font-size: 45px;
-    }
   }
 }
 </style>

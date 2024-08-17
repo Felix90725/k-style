@@ -84,14 +84,14 @@ export default {
 };
 </script>
 
-<style scoped>
-.container {
-  max-width: 1000px;
-  min-height: 600px;
-}
-@media screen and (max-width: 584px) {
-  .orderId {
-    display: none;
+<style lang="scss" scoped>
+  .container {
+    max-width: 1000px;
+    min-height: 600px;
   }
-}
+  @media screen and (max-width: 584px) {
+    .orderId {
+      display: none;
+    }
+  }
 </style>

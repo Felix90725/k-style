@@ -38,7 +38,7 @@
           class="d-block w-100 position-relative"
           alt="幻燈片1"
         />
-        <div class="carousel-caption d-none d-md-block position-absolute" style="top: 60%">
+        <div class="carousel-caption d-md-block position-absolute" style="top: 60%">
           <router-link
             to="/userAllProducts"
             type="button"
@@ -55,7 +55,7 @@
           class="d-block w-100 position-relative"
           alt="幻燈片2"
         />
-        <div class="carousel-caption d-none d-md-block position-absolute" style="top: 60%">
+        <div class="carousel-caption d-md-block position-absolute" style="top: 60%">
           <router-link
             to="/userAllProducts"
             type="button"
@@ -72,7 +72,7 @@
           class="d-block w-100 position-relative"
           alt="幻燈片3"
         />
-        <div class="carousel-caption d-none d-md-block position-absolute" style="top: 60%">
+        <div class="carousel-caption d-md-block position-absolute" style="top: 60%">
           <router-link
             to="/userAllProducts"
             type="button"
@@ -108,7 +108,7 @@
   <div class="card-container container my-5 py-4">
     <h3 class="text-center">熱銷商品</h3>
     <div class="card-row row row-cols-1 row-cols-md-2 row-cols-lg-4 g-5">
-      <div class="col" v-for="item in topFourProducts" :key="item.id">
+      <div class="col mt-4 mt-md-5" v-for="item in topFourProducts" :key="item.id">
         <router-link :to="`product/${item.id}`" class="card m-auto text-decoration-none">
           <img
             :src="item.imageUrl"
@@ -346,7 +346,7 @@ input {
     }
     .card-row {
       margin: auto;
-      width: 80%;
+      width: 90%;
       .col {
         margin-bottom: 20px;
       }
@@ -359,15 +359,22 @@ input {
 @media screen and (max-width: 768px) {
   .card-container {
     .card-row {
-      width: 70%;
+      width: 100%;
+    }
+    .card-img {
+      height: 500px;
     }
   }
 }
 // 手機畫面
 @media screen and (max-width: 430px) {
   .card-container {
+    padding: 0;
     .card-row {
-      width: 80%;
+      width: 100%;
+    }
+    .card-img {
+      height: 400px;
     }
   }
 }

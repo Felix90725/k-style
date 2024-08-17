@@ -85,7 +85,7 @@
                     <th>付款狀態</th>
                     <td>
                       <strong v-if="order.is_paid" class="text-success">已付款</strong>
-                      <span v-else class="text-muted">尚未付款</span>
+                      <span v-else class="text-danger">尚未付款</span>
                     </td>
                   </tr>
                   <tr>
@@ -136,3 +136,9 @@ export default {
   mixins: [modalMixin],
 };
 </script>
+
+<style lang="scss" scoped>
+  table {
+    word-break: break-word; // 自動換行防止溢出
+  }
+</style>

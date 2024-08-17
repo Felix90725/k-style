@@ -1,7 +1,7 @@
 <template>
   <isLoading :active="isLoading" />
   <div class="container p-lg-5 m-0 m-auto" style="min-height: 660px" v-if="products.length > 0">
-    <h3 class="m-0 mb-4"><i class="bi bi-bag-heart me-2"></i>您的願望清單</h3>
+    <h3 class="m-0 mb-3 mt-4 mt-md-0"><i class="bi bi-bag-heart me-2"></i>您的願望清單</h3>
     <table class="table" style="max-width: 1200px">
       <thead>
         <tr>
@@ -15,10 +15,10 @@
       <tbody>
         <tr v-for="item in products" :key="item.id">
           <td class="ps-md-0"><img :src="item.imageUrl" :alt="item.title" /></td>
-          <td class="align-middle pb-0 pb-md-2">
+          <td class="align-middle py-0 py-md-2 align-items-md-end">
             <h5 class="mb-2">{{ item.title }}</h5>
-            <span class="m-0 p-1 px-2 rounded-1 text-dark"
-            style="font-size: 14px; background-color: #E9E9E9;">{{ item.category }}</span>
+            <span class="m-0 mb-1 p-1 px-2 rounded-1 text-dark flex"
+              style="font-size: 14px; background-color: #E9E9E9;">{{ item.category }}</span>
           </td>
           <td class="align-middle ps-lg-3 pt-0 pt-md-2">
             <p class="card-text mt-2">
@@ -41,8 +41,9 @@
               <i class="fa-solid fa-cart-shopping me-2"></i>加入購物車
             </button>
           </td>
-          <td class="align-middle text-center">
-            <button type="button" class="border-0 bg-white text-dark" @click="delFavorite(item)">
+          <td class="delBtn align-middle text-center">
+            <button type="button" class="btn border-0"
+            @click="delFavorite(item)">
               <i class="fa-solid fa-trash-can" style="font-size: 20px"></i>
             </button>
           </td>
@@ -153,7 +154,7 @@ img {
 }
 
 @media screen and (max-width: 991px) {
-  .addCartBtn {
+  .addCartBtn, .delBtn {
     padding: 0;
     button {
       width: 100%;
@@ -163,18 +164,23 @@ img {
 }
 @media screen and (max-width: 767px) {
   h5 {
-    font-size: 24px;
+    font-size: 20px;
   }
   p {
-    font-size: 18px;
+    font-size: 16px;
   }
   img {
-    width: 300px;
+    width: 100%;
     height: 400px;
+  }
+  .delBtn{
+    background-color: #E9E9E9;
+    border-radius: 3px;
+    margin: 5px 0;
   }
   .table {
     span {
-      font-size: 22px;
+      font-size: 16px;
       & + span {
         margin-left: 5px;
       }

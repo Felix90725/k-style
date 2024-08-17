@@ -44,19 +44,25 @@
         <table class="table">
           <thead>
             <tr>
-              <th class="col-6">商品</th>
-              <th class="col-3">數量</th>
-              <th class="col-2">價格</th>
+              <th class="col-2 ps-0">商品圖片</th>
+              <th class="col-4">商品</th>
+              <th class="col-4">數量</th>
               <th class="col-1"></th>
             </tr>
           </thead>
           <tbody>
             <tr class="align-middle" v-for="item in cart.carts" :key="item.id">
-              <td>
+              <td class="ps-0">
                 <img :src="item.product.imageUrl" :alt="item.product.category" />
-                <span class="ms-md-3 mt-2">{{ item.product.title }}</span>
               </td>
-              <td class="pe-4">
+              <td>
+                <span class="">{{ item.product.title }}</span>
+                <span class="d-block" style="font-size: 16px;">
+                  <span class="price d-md-none" style="font-size: 16px;">價格:</span> NT$
+                  {{ $filters.currency(item.total) }}
+                </span>
+              </td>
+              <td class="pe-md-4 px-0">
                 <div class="input-group bg-warning rounded-1">
                   <div class="input-group-prepend">
                     <button
@@ -95,16 +101,10 @@
                   </div>
                 </div>
               </td>
-              <td>
-                <span
-                  ><span class="price d-md-none">價格:</span> NT$
-                  {{ $filters.currency(item.total) }}</span
-                >
-              </td>
-              <td>
+              <td class="delBtn ">
                 <button
                   type="button"
-                  class="border-0 bg-white text-dark"
+                  class="btn border-0 p-0 w-100"
                   @click="openDelProductModal(false, item)"
                 >
                   <i class="fa-solid fa-trash-can" style="font-size: 20px"></i>
@@ -190,10 +190,10 @@
         </div>
       </div>
     </div>
-    <div class="text text-center p-5 m-5" style="min-height: 400px" v-else>
+    <div class="text text-center p-md-5 m-md-5" style="min-height: 400px" v-else>
       <i class="fa-solid fa-cart-plus me-3 mt-5" style="font-size: 90px"></i>
       <h2 class="pt-4 pb-3">您的購物車目前是空的唷～</h2>
-      <p class="p-3" style="font-size: 20px">趕快加入商品到購物車！！！</p>
+      <p class="p-2" style="font-size: 20px">趕快加入商品到購物車！！！</p>
       <router-link to="/userAllProducts" class="btn btn-dark mb-1">繼續選購</router-link>
     </div>
   </div>
@@ -270,10 +270,10 @@ export default {
       this.$http
         .put(api, { data: cart })
         .then((res) => {
+          this.$httpMessageState(res, '更新數量');
+          this.isLoading = false;
           emitter.emit('updateCart'); // 與 navCart 同步更新
           this.getCart();
-          this.isLoading = false;
-          this.$httpMessageState(res, '更新數量');
         })
         .catch((err) => {
           this.$httpMessageState(err, '連線錯誤，請再試一次');
@@ -308,10 +308,10 @@ export default {
         this.$http
           .delete(api)
           .then((res) => {
+            this.isLoading = false;
             emitter.emit('updateCart'); // 與 UserNavbar 同步更新
             this.$refs.delModal.hideModal();
             this.getCart();
-            this.isLoading = false;
             this.$httpMessageState(res, '刪除品項');
           })
           .catch((err) => {
@@ -325,10 +325,10 @@ export default {
         this.$http
           .delete(api)
           .then((res) => {
+            this.isLoading = false;
             emitter.emit('updateCart'); // 與 UserNavbar 同步更新
             this.$refs.userDelModal.hideModal();
             this.getCart();
-            this.isLoading = false;
             this.$httpMessageState(res, '刪除購物車');
           })
           .catch((err) => {
@@ -344,20 +344,26 @@ export default {
       const coupon = {
         code: this.coupon_code,
       };
+      this.isLoading = true;
       this.$http
         .post(api, { data: coupon })
         .then((res) => {
-          if (res.data.success === false) {
+          this.isLoading = false;
+          console.log(res);
+          if (res.data.success === true) {
+            this.coupon_data = res.data;
+            emitter.emit('push-message', {
+              style: 'success',
+              title: '優惠劵套用成功!',
+            });
+          } else {
             emitter.emit('push-message', {
               style: 'danger',
               title: '找不到優惠劵!',
             });
             this.coupon_code = '';
-          } else this.coupon_data = res.data;
-          emitter.emit('push-message', {
-            style: 'success',
-            title: '優惠劵套用成功!',
-          });
+          }
+
           this.getCart();
         })
         .catch((err) => {
@@ -367,6 +373,7 @@ export default {
   },
   mounted() {
     this.getCart();
+    emitter.emit('updateCart'); // 與 UserNavbar 同步更新
   },
 };
 </script>
@@ -456,6 +463,11 @@ img {
   }
 }
 @media screen and (max-width: 767px) {
+  .delBtn{
+    background-color: #E9E9E9;
+    border-radius: 3px;
+    margin: 5px 0;
+  }
   .shoppingProcess {
     p {
       display: none;
@@ -474,7 +486,7 @@ img {
   }
   .table {
     span {
-      font-size: 24px;
+      font-size: 20px;
     }
     border-collapse: collapse;
     td,

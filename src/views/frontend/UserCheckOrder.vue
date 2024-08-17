@@ -76,8 +76,17 @@ export default {
       this.tempOrder = { ...item };
       this.$refs.userOrderModal.showModal();
     },
+
+    // 滾動到最上方
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    },
   },
   created() {
+    this.scrollToTop();
     this.getOrder();
     this.email = this.$route.params.email_id;
   },

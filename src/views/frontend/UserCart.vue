@@ -370,9 +370,18 @@ export default {
           this.$httpMessageState(err, '連線錯誤，請再試一次');
         });
     },
+
+    // 滾動到最上方
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    },
   },
   mounted() {
     this.getCart();
+    this.scrollToTop();
     emitter.emit('updateCart'); // 與 UserNavbar 同步更新
   },
 };

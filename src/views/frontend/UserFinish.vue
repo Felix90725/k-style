@@ -37,6 +37,23 @@
   </div>
 </template>
 
+<script>
+export default {
+  methods: {
+    // 滾動到最上方
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    },
+  },
+  created() {
+    this.scrollToTop();
+  },
+};
+</script>
+
 <style lang="scss" scoped>
 p {
   font-size: 14px;

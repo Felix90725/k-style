@@ -192,11 +192,20 @@ export default {
           this.isLoading = false;
         });
     },
+
+    // 滾動到最上方
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    },
   },
   created() {
     // 取得訂單ID
     this.orderId = this.$route.params.order_id;
     this.getOrder();
+    this.scrollToTop();
     emitter.emit('updateCart'); // 與 UserNavbar 同步更新
   },
 };

@@ -1,4 +1,4 @@
-# k-style韓系服飾電商
+# k-style韓系服飾電商網站
 ![image](https://github.com/user-attachments/assets/c80b2621-e8bf-4da9-9129-ad7d509051e8)
 
 ## 專案介紹

@@ -21,8 +21,18 @@
         <img :src="product.imageUrl" alt="product1" />
       </div>
       <div class="col-md-7 mx-auto position-relative">
-        <div class="product-title">
+        <div class="product-title d-flex justify-content-between">
           <h2 class="mt-2 mt-md-0">{{ product.title }}</h2>
+          <div class="heart">
+            <button type="button" class="btn border-0" @click="toggleFavorite(product)">
+              <i
+                class="fa-solid fa-heart text-danger"
+                style="font-size: 2rem"
+                v-if="favoriteItems.includes(product.id)"
+              ></i>
+              <i class="fa-regular fa-heart text-danger" style="font-size: 2rem" v-else></i>
+            </button>
+          </div>
         </div>
         <div class="price mt-3">
           <h4 class="card-text mt-2">
@@ -102,16 +112,6 @@
                 </button>
               </div>
             </div>
-          </div>
-          <div class="heart position-absolute">
-            <button type="button" class="btn border-0" @click="toggleFavorite(product)">
-              <i
-                class="fa-solid fa-heart text-danger"
-                style="font-size: 2rem"
-                v-if="favoriteItems.includes(product.id)"
-              ></i>
-              <i class="fa-regular fa-heart text-danger" style="font-size: 2rem" v-else></i>
-            </button>
           </div>
         </div>
         <div class="row mt-4">
@@ -332,33 +332,5 @@ input[type="number"]::-webkit-inner-spin-button {
 .product-description {
   border-top: 1px solid #bebebe;
   border-bottom: 1px solid #bebebe;
-}
-.heart{
-  left: 90%;
-  top: 0;
-}
-@media screen and (max-width: 1199px) {
-    .heart{
-    left: 87%;
-    top: 0;
-  }
-}
-@media screen and (max-width: 991px) {
-    .heart{
-    left: 83%;
-    top: 0;
-  }
-}
-@media screen and (max-width: 767px) {
-    .heart{
-    left: 86%;
-    top: 5px;
-  }
-}
-@media screen and (max-width: 430px) {
-    .heart{
-    left: 81.5%;
-    top: 0;
-  }
 }
 </style>

@@ -98,9 +98,15 @@ export default {
     max-width: 1000px;
     min-height: 600px;
   }
+  @media screen and (max-width: 768px) {
+    .container{
+      min-height: 670px;
+    }
+  }
   @media screen and (max-width: 584px) {
     .orderId {
       display: none;
+      min-height: 600px;
     }
   }
 </style>

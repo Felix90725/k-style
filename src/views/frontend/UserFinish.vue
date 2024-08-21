@@ -26,7 +26,7 @@
       </li>
     </ol>
   </div>
-  <div class="text text-center p-sm-3 m-sm-0 pb-5" style="min-height: 500px;" >
+  <div class="successPay text text-center p-sm-3 m-sm-0 m-md-5">
     <i class="bi bi-bag-check-fill" style="font-size: 90px"></i>
     <h2 class="pt-4 pb-3">您的訂單已成功付款！</h2>
     <p class="p-3 pt-0" style="font-size: 16px">
@@ -88,7 +88,11 @@ p {
     }
   }
 }
-@media screen and (max-width: 767px) {
+.successPay{
+  min-height: 500px;
+}
+
+@media screen and (max-width: 768px) {
   .shoppingProcess {
     p {
       display: none;

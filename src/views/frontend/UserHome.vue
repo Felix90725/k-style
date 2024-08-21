@@ -362,7 +362,7 @@ input {
       width: 100%;
     }
     .card-img {
-      height: 500px;
+      height: 450px;
     }
   }
 }
